@@ -32,7 +32,7 @@
       const body = encodeURIComponent(
         `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n`
       );
-      const to = 'hello@verlox.uk';
+      const to = 'contact@velox.uk';
       window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
       if (status) status.textContent = 'Opening your email client…';
     });
