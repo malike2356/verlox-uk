@@ -158,6 +158,24 @@ html[data-theme="dark"] .platform-card__desc{color:#cbd5f5}
 .callout__title a{color:#e5e7eb}
 .callout__desc{margin:0;font-size:13px;color:#cbd5f5}
 
+html[data-theme="light"] .callout{
+  background:radial-gradient(circle at 0% 0%, rgba(56,189,248,.10), transparent 50%), #ffffff;
+  color:#0b1020;
+  border-color:rgba(99,102,241,.18);
+}
+
+html[data-theme="light"] .callout__label{
+  color:rgba(79,70,229,.65);
+}
+
+html[data-theme="light"] .callout__title a{
+  color:#4f46e5;
+}
+
+html[data-theme="light"] .callout__desc{
+  color:var(--ink-soft);
+}
+
 /* Contact */
 .contact{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:22px;align-items:flex-start}
 .form{border-radius:18px;border:1px solid var(--border-strong);background:rgba(255,255,255,.96);box-shadow:var(--shadow-soft);padding:18px}
