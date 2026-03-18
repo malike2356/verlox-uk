@@ -12,7 +12,6 @@
     });
   }
 
-  // Theme toggle (dark / light with persistence)
   const root = document.documentElement;
   const themeToggle = document.getElementById('themeToggle');
   const themeText = themeToggle?.querySelector('.theme-toggle__text');
@@ -24,7 +23,7 @@
     } else {
       root.setAttribute('data-theme', 'dark');
       if (themeText) themeText.textContent = 'Dark';
-    }
+    };
   };
 
   const storedTheme = window.localStorage.getItem('verlox-theme');
