@@ -44,3 +44,17 @@
     });
   }
 })();
+
+// Contact form anti-spam: set a timestamp for server-side age validation.
+(function () {
+  const tsInput = document.getElementById('formTs');
+  const contactForm = document.getElementById('contactForm');
+
+  if (tsInput) tsInput.value = String(Date.now()); // ms since epoch
+
+  if (contactForm && tsInput) {
+    contactForm.addEventListener('submit', () => {
+      tsInput.value = String(Date.now()); // refresh timestamp at submit
+    });
+  }
+})();

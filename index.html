@@ -16,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap"
       rel="stylesheet" />
 
-    <link rel="stylesheet" href="styles.css?v=20260318a" />
+    <link rel="stylesheet" href="styles.css?v=20260318b" />
   </head>
 
   <body>
@@ -204,6 +204,10 @@
 
           <div class="contact">
             <form class="form" id="contactForm" method="post" action="contact.php">
+              <!-- Anti-spam (honeypot + timestamp) -->
+              <input type="text" name="company" tabindex="-1" autocomplete="off" value=""
+                style="display:none" aria-hidden="true" />
+              <input type="hidden" name="form_ts" id="formTs" value="" />
               <div class="form__grid">
                 <label class="field">
                   <span class="field__label">Name</span>
@@ -268,7 +272,7 @@
       </div>
     </footer>
 
-    <script src="main.js?v=20260318a"></script>
+    <script src="main.js?v=20260318b"></script>
   </body>
 
 </html>
