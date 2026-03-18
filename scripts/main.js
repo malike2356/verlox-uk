@@ -29,8 +29,6 @@
   const storedTheme = window.localStorage.getItem('verlox-theme');
   if (storedTheme === 'light' || storedTheme === 'dark') {
     applyTheme(storedTheme);
-  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    applyTheme('light');
   } else {
     applyTheme('dark');
   }
