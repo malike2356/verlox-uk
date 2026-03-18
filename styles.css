@@ -25,6 +25,67 @@ body{
     var(--navy);
 }
 
+/* Light theme overrides */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]) body{
+    color:#0f172a;
+    background:#f5f5f7;
+  }
+}
+
+[data-theme="light"] body{
+  color:#0f172a;
+  background:#f5f5f7;
+}
+[data-theme="light"] .topbar{
+  background:rgba(248,250,252,.95);
+  border-bottom-color:rgba(15,23,42,.06);
+}
+[data-theme="light"] .brand__meta{color:#64748b}
+[data-theme="light"] .nav__link{color:#1f2937;}
+[data-theme="light"] .nav__link:hover{background:rgba(15,23,42,.04); color:#0f172a;}
+[data-theme="light"] .btn--ghost{
+  background:rgba(15,23,42,.03);
+  border-color:rgba(15,23,42,.10);
+  color:#0f172a;
+}
+[data-theme="light"] .btn--ghost:hover{background:rgba(15,23,42,.08);}
+[data-theme="light"] .hero__subtitle{color:#4b5563;}
+[data-theme="light"] .trust__item{
+  background:#fff;
+  border-color:rgba(15,23,42,.08);
+}
+[data-theme="light"] .trust__desc{color:#64748b;}
+[data-theme="light"] .hero__panel .panel{
+  background:#ffffff;
+  border-color:rgba(15,23,42,.08);
+  box-shadow:0 16px 40px rgba(15,23,42,.10);
+}
+[data-theme="light"] .panel__hint{color:#6b7280;}
+[data-theme="light"] .section--alt{
+  background:#f9fafb;
+  border-color:rgba(15,23,42,.06);
+}
+[data-theme="light"] .card{
+  background:#ffffff;
+  border-color:rgba(15,23,42,.08);
+}
+[data-theme="light"] .section__subtitle{color:#4b5563;}
+[data-theme="light"] .form,
+[data-theme="light"] .aside-card{
+  background:#ffffff;
+  border-color:rgba(15,23,42,.08);
+}
+[data-theme="light"] .field__input{
+  background:#ffffff;
+  border-color:rgba(148,163,184,.6);
+  color:#0f172a;
+}
+[data-theme="light"] .footer{
+  background:#f3f4f6;
+  border-top-color:rgba(15,23,42,.06);
+}
+
 a{color:inherit}
 .container{width:min(1120px, 92vw); margin:0 auto}
 .skip-link{
@@ -72,6 +133,32 @@ a{color:inherit}
   border-radius:10px;
 }
 .nav__link:hover{background:rgba(255,255,255,.06); color:#fff}
+
+.theme-toggle{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.6);
+  background:rgba(15,23,42,.5);
+  color:#e5e7eb;
+  padding:6px 10px;
+  font-size:12px;
+  cursor:pointer;
+}
+.theme-toggle__icon{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#facc15,#eab308);
+}
+[data-theme="light"] .theme-toggle{
+  background:#ffffff;
+  color:#0f172a;
+}
+[data-theme="light"] .theme-toggle__icon{
+  background:radial-gradient(circle at 30% 30%,#facc15,#f97316);
+}
 
 .nav-toggle{
   display:none;
