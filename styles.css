@@ -111,7 +111,7 @@ html[data-theme="dark"] .trust__kpi{color:#e5e7eb}
 .trust__desc{margin:0;font-size:12px;line-height:1.5;color:var(--muted)}
 
 /* Panel */
-.hero__panel .panel{border-radius:var(--radius-lg);background:var(--bg-alt);border:1px solid var(--border-subtle);box-shadow:var(--shadow-soft);overflow:hidden}
+.hero__panel .panel{border-radius:var(--radius-lg);background:var(--bg-alt);border:1px solid var(--border-subtle);box-shadow:var(--shadow-soft);overflow:visible}
 html[data-theme="dark"] .hero__panel .panel{background:rgba(15,23,42,.98);border-color:rgba(148,163,184,.55);box-shadow:0 28px 70px rgba(15,23,42,.65)}
 .panel__header{padding:16px 18px 10px;border-bottom:1px solid var(--border-subtle)}
 html[data-theme="dark"] .panel__header{border-bottom-color:rgba(148,163,184,.35)}
