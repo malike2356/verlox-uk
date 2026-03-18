@@ -201,7 +201,12 @@ html[data-theme="dark"] .field__input{background:rgba(15,23,42,.9);border-color:
 .contact__aside{display:grid;gap:12px}
 .aside-card{border-radius:16px;border:1px solid var(--border-subtle);background:rgba(255,255,255,.96);padding:14px}
 html[data-theme="dark"] .aside-card{background:rgba(15,23,42,.98);border-color:rgba(148,163,184,.35)}
-.aside-card__title{margin:0 0 6px;font-size:14px}
+.aside-card__title{margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+html[data-theme="dark"] .aside-card__title{color:rgba(148,163,184,.9)}
+.aside-card__name{margin:0;font-size:16px;font-weight:700;letter-spacing:.01em;color:#111827}
+html[data-theme="dark"] .aside-card__name{color:#e5e7eb}
+.aside-card__meta{margin:4px 0 10px;font-size:13px;line-height:1.45;color:var(--ink-soft)}
+html[data-theme="dark"] .aside-card__meta{color:#cbd5f5}
 .aside-card__text{margin:0 0 6px;font-size:13px;color:var(--ink-soft)}
 html[data-theme="dark"] .aside-card__text{color:#cbd5f5}
 .aside-card__links{display:flex;flex-direction:column;gap:4px}
