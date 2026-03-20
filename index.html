@@ -7,43 +7,38 @@
     <meta name="description"
       content="Verlox UK builds secure, high-impact websites, platforms, and automation for modern businesses." />
     <meta name="theme-color" content="#0B1829" />
-
     <title>Verlox UK | Websites, Platforms, Automation</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap"
-      rel="stylesheet" />
-
-    <link rel="stylesheet" href="styles.css?v=20260318k" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=20260320b" />
   </head>
 
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
+    <!-- ── Nav ────────────────────────────────────────────────────────────── -->
     <header class="topbar">
       <div class="container topbar__inner">
         <a class="brand" href="/" aria-label="Verlox UK home">
           <span class="brand__mark" aria-hidden="true">V</span>
-          <span class="brand__text">
+          <span>
             <span class="brand__name">Verlox UK</span>
             <span class="brand__meta">Websites • Platforms • Automation</span>
           </span>
         </a>
 
         <nav class="nav" aria-label="Primary">
-          <a class="nav__link" href="#work">What we do</a>
-          <a class="nav__link" href="#builds">What we’ve built</a>
+          <a class="nav__link" href="#work">Services</a>
+          <a class="nav__link" href="#builds">Portfolio</a>
           <a class="nav__link" href="#contact">Contact</a>
-          <a class="btn btn--primary" href="#contact">Request a proposal</a>
+          <a class="btn btn--primary" href="#contact">Get a proposal</a>
         </nav>
 
-        <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle dark or light mode">
-          <span class="theme-toggle__icon" aria-hidden="true">●</span>
-          <span class="theme-toggle__text">Dark</span>
+        <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle colour mode">
+          <span class="theme-toggle__icon" aria-hidden="true"></span>
+          <span class="theme-toggle__text">Light</span>
         </button>
-
         <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
           <span class="nav-toggle__bar"></span>
           <span class="nav-toggle__bar"></span>
@@ -53,175 +48,170 @@
     </header>
 
     <main id="main">
+
+      <!-- ── Hero ─────────────────────────────────────────────────────────── -->
       <section class="hero">
-        <div class="container hero__grid">
-          <div class="hero__copy">
-            <p class="eyebrow">Engineering & delivery</p>
-            <h1 class="hero__title">
-              Powerful digital systems, built with security and clarity.
-            </h1>
-            <p class="hero__subtitle">
-              We build professional websites, platforms, and automation—designed for conversion, reliability, and
-              security by design, and AI-powered workflows.
-              Verlox UK is a UK-based delivery company focused on secure, conversion-ready websites, platforms,
-              and automation.
-            </p>
+        <div class="hero__bg" aria-hidden="true">
+          <div class="hero__orb hero__orb--1"></div>
+          <div class="hero__orb hero__orb--2"></div>
+          <div class="hero__orb hero__orb--3"></div>
+        </div>
 
-            <div class="hero__cta">
-              <a class="btn btn--primary" href="#contact">Get a proposal</a>
-              <a class="btn btn--ghost" href="#builds">See what we’ve built</a>
-            </div>
-
-            <dl class="trust">
-              <div class="trust__item">
-                <dt class="trust__kpi">Security by design</dt>
-                <dd class="trust__desc">Hardening, auditability, safe defaults from day one.</dd>
-              </div>
-              <div class="trust__item">
-                <dt class="trust__kpi">AI powered</dt>
-                <dd class="trust__desc">Smarter workflows, faster outputs, better insight.</dd>
-              </div>
-              <div class="trust__item">
-                <dt class="trust__kpi">Experienced teams</dt>
-                <dd class="trust__desc">Years across engineering, security, cyber, and AI.</dd>
-              </div>
-            </dl>
-          </div>
-
-          <div class="hero__panel" aria-label="Highlights">
-            <div class="panel">
-              <div class="panel__header">
-                <p class="panel__title">What we do</p>
-                <p class="panel__hint">From first draft to production launch.</p>
-              </div>
-              <ul class="panel__list">
-                <li><span class="pill">Websites</span> premium landing pages, marketing sites, SEO foundations</li>
-                <li><span class="pill">Platforms</span> multi‑tenant systems, portals, dashboards</li>
-                <li><span class="pill">Automation</span> integrations, workflows, reporting</li>
-                <li><span class="pill">Security</span> logging, monitoring, access control, best‑practice hardening</li>
-              </ul>
-
-              <div class="panel__divisions">
-                <p class="panel__hint">Capabilities</p>
-                <p class="panel__divisions-lead">Core expertise across engineering, security, and automation.</p>
-                <ul class="panel__divisions-list">
-                  <li>Web design & engineering</li>
-                  <li>Platform & dashboards</li>
-                  <li>Custom business plugins & integrations for WordPress</li>
-                  <li>Automation & integrations</li>
-                  <li>Security hardening & logging</li>
-                </ul>
-              </div>
-
-              <div class="panel__footer">
-                <a class="panel__link" href="#work">Explore our services</a>
-                <span class="panel__sep" aria-hidden="true">•</span>
-                <a class="panel__link" href="#contact">Contact</a>
+        <div class="hero__content">
+          <div class="container">
+            <div class="hero__inner">
+              <p class="eyebrow">UK Engineering &amp; Delivery</p>
+              <h1 class="hero__title">
+                Powerful digital systems,<br>
+                built with security<br>
+                and clarity.
+              </h1>
+              <p class="hero__subtitle">
+                Websites, platforms, and automation—conversion‑ready,
+                security‑hardened, and AI‑capable from day one.
+              </p>
+              <div class="hero__cta">
+                <a class="btn btn--primary" href="#contact">Get a proposal</a>
+                <a class="btn btn--ghost" href="#work">See our services</a>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- scrolling ticker -->
+        <div class="marquee" aria-hidden="true">
+          <div class="marquee__track">
+            <span class="marquee__item">Websites</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">Platforms</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">Security Hardening</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">Automation</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">AI Workflows</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">WordPress</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">Dashboards</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">API Integrations</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">Verlox UK</span><span class="marquee__sep">·</span>
+            <!-- duplicate for seamless loop -->
+            <span class="marquee__item">Websites</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">Platforms</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">Security Hardening</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">Automation</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">AI Workflows</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">WordPress</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">Dashboards</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">API Integrations</span><span class="marquee__sep">·</span>
+            <span class="marquee__item">Verlox UK</span><span class="marquee__sep">·</span>
+          </div>
+        </div>
       </section>
 
-      <section id="work" class="section">
+      <!-- ── Services ─────────────────────────────────────────────────────── -->
+      <section id="work" class="section--services">
         <div class="container">
-          <div class="section-panel">
-            <div class="section__head">
-              <h2 class="section__title">Professional, yet powerful</h2>
-              <p class="section__subtitle">We take you from “idea on a page” to a live, secure system that converts and
-                holds up in production.</p>
-            </div>
-
-            <div class="cards">
-              <article class="card">
-                <h3 class="card__title">High‑impact web presence</h3>
-                <p class="card__desc">One‑page sites, full marketing sites, copy structure, and lead capture that tie
-                  back to real business goals.</p>
-              </article>
-              <article class="card">
-                <h3 class="card__title">Systems that scale</h3>
-                <p class="card__desc">Multi‑tenant platforms, admin panels, and analytics that work for both ops teams
-                  and leadership.</p>
-              </article>
-              <article class="card">
-                <h3 class="card__title">Secure by design</h3>
-                <p class="card__desc">Secure‑by‑default infrastructure, logging, least‑privilege access, and sensible
-                  hardening.</p>
-              </article>
-              <article class="card">
-                <h3 class="card__title">AI & automation</h3>
-                <p class="card__desc">AI‑powered workflows, integrations, and reporting that reduce manual work and
-                  surface the right signals.</p>
-              </article>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <section id="builds" class="section section--alt">
-        <div class="container split">
-          <div class="split__copy">
-            <h2 class="section__title">Platforms behind our clients’ operations</h2>
+          <header class="section__head section__head--left reveal">
+            <p class="section__eyebrow">Services</p>
+            <h2 class="section__title">What we build</h2>
             <p class="section__subtitle">
-              A snapshot of the systems that sit underneath our clients’ day‑to‑day work.
+              From first brief to production launch — design, engineering, security, and delivery.
             </p>
-            <div class="platform-grid">
-              <div class="platform-card">
-                <h3 class="platform-card__title">Marketing & launch sites</h3>
-                <p class="platform-card__desc">High‑conversion marketing sites and launch pages for B2B, SaaS, and
-                  platforms.</p>
-              </div>
-              <div class="platform-card">
-                <h3 class="platform-card__title">Labyrinth CMS</h3>
-                <p class="platform-card__desc">Security‑first, deception‑aware CMS with full e‑commerce and a dedicated
-                  theme marketplace.</p>
-              </div>
-              <div class="platform-card">
-                <h3 class="platform-card__title">TuinApp</h3>
-                <p class="platform-card__desc">Multi‑tenant MIS powering workforce, scheduling, payroll, and client ops
-                  for service businesses.</p>
-              </div>
-              <div class="platform-card">
-                <h3 class="platform-card__title">ABBIS</h3>
-                <p class="platform-card__desc">Business intelligence and operations platform for borehole drilling and
-                  field operations.</p>
-              </div>
-            </div>
-          </div>
+          </header>
 
-          <div class="split__callout">
-            <div class="callout callout--propreneur">
-              <p class="callout__label">Featured build</p>
-              <p class="callout__title">
-                <a href="https://propreneur.co.uk/" target="_blank" rel="noreferrer">Propreneur</a>
-              </p>
-              <p class="callout__desc">A professional platform and marketing site for property entrepreneurs.</p>
-              <div class="hero__cta" style="margin: 0;">
-                <a class="btn btn--ghost" href="https://propreneur.co.uk/" target="_blank" rel="noreferrer">Visit</a>
-                <a class="btn btn--primary" href="#contact">Build something similar</a>
-              </div>
-              <p class="callout__desc" style="margin-top: 14px;">
-                Want a similar build? Tell us what you need below.
-              </p>
+          <div class="service-bento">
+            <div class="service-block reveal">
+              <span class="service-block__watermark" aria-hidden="true">01</span>
+              <p class="service-block__num">01</p>
+              <h3 class="service-block__title">High‑impact<br>web presence</h3>
+              <p class="service-block__desc">One‑page sites, full marketing sites, structured copy, and lead capture tied back to real business goals.</p>
+            </div>
+
+            <div class="service-block reveal reveal--delay-1">
+              <span class="service-block__watermark" aria-hidden="true">02</span>
+              <p class="service-block__num">02</p>
+              <h3 class="service-block__title">Systems<br>that scale</h3>
+              <p class="service-block__desc">Multi‑tenant platforms, admin panels, and analytics that work for both ops teams and leadership.</p>
+            </div>
+
+            <div class="service-block reveal reveal--delay-2">
+              <span class="service-block__watermark" aria-hidden="true">03</span>
+              <p class="service-block__num">03</p>
+              <h3 class="service-block__title">Secure<br>by design</h3>
+              <p class="service-block__desc">Secure‑by‑default infrastructure, logging, least‑privilege access, and sensible hardening at every layer.</p>
+            </div>
+
+            <div class="service-block reveal reveal--delay-3">
+              <span class="service-block__watermark" aria-hidden="true">04</span>
+              <p class="service-block__num">04</p>
+              <h3 class="service-block__title">AI &amp;<br>automation</h3>
+              <p class="service-block__desc">AI‑powered workflows, integrations, and reporting that reduce manual work and surface the right signals.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="contact" class="section">
+      <!-- ── Portfolio ─────────────────────────────────────────────────────── -->
+      <section id="builds" class="section--showcase">
         <div class="container">
-          <div class="section__head">
-            <h2 class="section__title">Contact Verlox UK</h2>
-            <p class="section__subtitle">Tell us what you’re building. We’ll respond with a clear next step.</p>
+          <header class="section__head section__head--left reveal">
+            <p class="section__eyebrow">Portfolio</p>
+            <h2 class="section__title">Platforms behind our<br>clients' operations</h2>
+            <p class="section__subtitle">
+              A snapshot of the systems that sit underneath our clients' day‑to‑day work.
+            </p>
+          </header>
+
+          <!-- Featured build -->
+          <div class="builds-featured reveal">
+            <div>
+              <p class="builds-featured__label">Featured build</p>
+              <h3 class="builds-featured__title">
+                <a href="https://propreneur.co.uk/" target="_blank" rel="noreferrer">Propreneur</a>
+              </h3>
+              <p class="builds-featured__desc">
+                A professional platform and marketing site for property entrepreneurs —<br>
+                full design, engineering, and production delivery by Verlox UK.
+              </p>
+            </div>
+            <div class="builds-featured__cta">
+              <a class="btn btn--outline-light" href="https://propreneur.co.uk/" target="_blank" rel="noreferrer">Visit site →</a>
+              <a class="btn btn--gold" href="#contact">Build something similar</a>
+            </div>
           </div>
+
+          <!-- Other platforms -->
+          <div class="platform-grid reveal">
+            <div class="platform-card">
+              <h3 class="platform-card__title">Marketing &amp; launch sites</h3>
+              <p class="platform-card__desc">High‑conversion marketing sites and launch pages for B2B, SaaS, and platforms.</p>
+            </div>
+            <div class="platform-card">
+              <h3 class="platform-card__title">Labyrinth CMS</h3>
+              <p class="platform-card__desc">Security‑first CMS with full e‑commerce and a dedicated theme marketplace.</p>
+            </div>
+            <div class="platform-card">
+              <h3 class="platform-card__title">TuinApp</h3>
+              <p class="platform-card__desc">Multi‑tenant MIS powering workforce, scheduling, payroll, and client ops for service businesses.</p>
+            </div>
+            <div class="platform-card">
+              <h3 class="platform-card__title">ABBIS</h3>
+              <p class="platform-card__desc">Business intelligence and operations platform for borehole drilling and field operations.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Contact ──────────────────────────────────────────────────────── -->
+      <section id="contact" class="section section--alt">
+        <div class="container">
+          <header class="section__head reveal">
+            <p class="section__eyebrow">Get in touch</p>
+            <h2 class="section__title">Let's build something</h2>
+            <p class="section__subtitle">Tell us what you're working on. We'll come back with a clear next step.</p>
+          </header>
 
           <div class="contact">
-            <form class="form" id="contactForm" method="post" action="contact.php">
-              <!-- Anti-spam (honeypot + timestamp) -->
-              <input type="text" name="company" tabindex="-1" autocomplete="off" value="" style="display:none"
-                aria-hidden="true" />
+            <form class="form reveal" id="contactForm" method="post" action="contact.php">
+              <input type="text" name="company" tabindex="-1" autocomplete="off" value="" style="display:none" aria-hidden="true" />
               <input type="hidden" name="form_ts" id="formTs" value="" />
+
               <div class="form__grid">
                 <label class="field">
                   <span class="field__label">Name</span>
@@ -241,50 +231,48 @@
               <div class="form__actions">
                 <button class="btn btn--primary" type="submit">Send message</button>
                 <p class="form__note">
-                  We’ll receive this by email and reply directly.
-                  Prefer direct email? Use <a href="mailto:contact@verlox.uk">contact@verlox.uk</a>.
+                  We'll reply from <a href="mailto:contact@verlox.uk">contact@verlox.uk</a> directly.
                 </p>
               </div>
-
               <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
             </form>
 
-            <aside class="contact__aside">
-              <div class="aside-card">
-                <p class="aside-card__title">Company</p>
-                <p class="aside-card__name">Verlox UK</p>
-                <p class="aside-card__meta">Engineering &amp; delivery (UK)</p>
-                <div class="aside-card__links">
-                  <a class="aside-link" href="mailto:contact@verlox.uk">contact@verlox.uk</a>
-                  <a class="aside-link" href="https://verlox.uk/" target="_blank" rel="noreferrer">verlox.uk</a>
-                </div>
+            <aside class="contact__info reveal reveal--delay-2" aria-label="Company info">
+              <span class="contact__info-label">Company</span>
+              <p class="contact__info-name">Verlox UK</p>
+              <p class="contact__info-meta">Engineering &amp; delivery — United Kingdom</p>
+              <div class="contact__info-links">
+                <a class="contact__info-link" href="mailto:contact@verlox.uk">contact@verlox.uk</a>
+                <a class="contact__info-link" href="https://verlox.uk/" target="_blank" rel="noreferrer">verlox.uk</a>
               </div>
-              <div class="aside-card">
-                <h3 class="aside-card__title">Divisions</h3>
-                <ul class="aside-list">
-                  <li><strong>Verlox Cyber</strong> — Cybersecurity services, reviews, hardening, and incident support.
-                  </li>
-                  <li><strong>Verlox IT</strong> — IT services, managed support, systems delivery, and operations.</li>
-                </ul>
+              <div class="contact__info-divs">
+                <h3>Divisions</h3>
+                <p class="contact__div-item">
+                  <strong>Verlox Cyber</strong>
+                  Cybersecurity services, reviews, hardening, and incident support.
+                </p>
+                <p class="contact__div-item">
+                  <strong>Verlox IT</strong>
+                  IT services, managed support, systems delivery, and operations.
+                </p>
               </div>
             </aside>
           </div>
         </div>
       </section>
+
     </main>
 
     <footer class="footer">
       <div class="container footer__inner">
-        <p class="footer__left">© <span id="year"></span> Verlox UK. All rights reserved.</p>
+        <p>© <span id="year"></span> Verlox UK. All rights reserved.</p>
         <p class="footer__right">
-          Co-executed delivery with partner teams at <a href="https://veloxpsi.com/" target="_blank"
-            rel="noreferrer">Velox
-            PSI</a> (as applicable).
+          Co-executed with <a href="https://veloxpsi.com/" target="_blank" rel="noreferrer">Velox PSI</a> partner teams where applicable.
         </p>
       </div>
     </footer>
 
-    <script src="main.js?v=20260318k"></script>
+    <script src="main.js?v=20260320b"></script>
   </body>
 
 </html>

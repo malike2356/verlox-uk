@@ -1,0 +1,26 @@
+# Secrets & credentials
+.access.deploy
+.access.config
+*.env
+.env.*
+
+# Deploy scripts (contain or reference secrets)
+deploy_verlox_uk.sh
+scripts/deploy.sh
+
+# Logs
+*.log
+spam-blocked.log
+
+# Rate-limit temp files
+/tmp/verlox_contact_rl/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
