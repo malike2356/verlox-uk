@@ -29,6 +29,7 @@
 
                 <div class="flex items-center gap-3 shrink-0">
                     <a class="text-verlox-accent" href="{{ route('mis.legal-documents.edit', $d) }}">Edit</a>
+                    <a class="text-verlox-accent" href="{{ route('legal.show', $d->slug) }}" target="_blank" rel="noreferrer">View</a>
                     <a class="text-verlox-accent" href="{{ route('mis.legal-documents.download', $d) }}">Download</a>
                     <form method="post" action="{{ route('mis.legal-documents.create-document', $d) }}" class="inline">@csrf
                         <button type="submit" class="text-verlox-accent">Save to Documents</button>
