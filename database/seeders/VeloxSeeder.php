@@ -8,6 +8,7 @@ use App\Models\ContentBlock;
 use App\Models\ContractTemplate;
 use App\Models\LegalDocument;
 use App\Models\Offering;
+use App\Models\OfferingType;
 use App\Models\PipelineStage;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -49,16 +50,44 @@ class VeloxSeeder extends Seeder
             PipelineStage::query()->firstOrCreate(['name' => $row['name']], $row);
         }
 
+        $offeringTypes = [
+            ['name' => 'Demo', 'slug' => 'demo', 'display_order' => 10],
+            ['name' => 'Trial', 'slug' => 'trial', 'display_order' => 20],
+            ['name' => 'Consultation', 'slug' => 'consultation', 'display_order' => 30],
+            ['name' => 'Quote', 'slug' => 'quote', 'display_order' => 40],
+            ['name' => 'Contact', 'slug' => 'contact', 'display_order' => 50],
+            ['name' => 'Purchase', 'slug' => 'purchase', 'display_order' => 60],
+        ];
+        foreach ($offeringTypes as $row) {
+            OfferingType::query()->firstOrCreate(['slug' => $row['slug']], $row + ['is_active' => true]);
+        }
+
+        $typesBySlug = OfferingType::query()->pluck('id', 'slug'); // slug => id
+
         $offerings = [
-            ['name' => 'Product demo', 'slug' => 'demo', 'type' => 'demo', 'summary' => 'Walkthrough of a Velox product', 'display_order' => 10],
-            ['name' => 'Trial access', 'slug' => 'trial', 'type' => 'trial', 'summary' => 'Time-limited trial environment', 'display_order' => 20],
-            ['name' => 'Consultation', 'slug' => 'consultation', 'type' => 'consultation', 'summary' => 'Architecture and delivery planning', 'display_order' => 30],
-            ['name' => 'Quotation', 'slug' => 'quotation', 'type' => 'quote', 'summary' => 'Scoped estimate for your build', 'display_order' => 40],
-            ['name' => 'Contact', 'slug' => 'contact', 'type' => 'contact', 'summary' => 'General enquiry', 'display_order' => 50],
-            ['name' => 'Starter engagement', 'slug' => 'starter', 'type' => 'purchase', 'summary' => 'Fixed discovery and roadmap pack', 'price_pence' => 250000, 'display_order' => 60],
+            ['name' => 'Product demo', 'slug' => 'demo', 'type_slug' => 'demo', 'summary' => 'Walkthrough of a Velox product', 'display_order' => 10],
+            ['name' => 'Trial access', 'slug' => 'trial', 'type_slug' => 'trial', 'summary' => 'Time-limited trial environment', 'display_order' => 20],
+            ['name' => 'Consultation', 'slug' => 'consultation', 'type_slug' => 'consultation', 'summary' => 'Architecture and delivery planning', 'display_order' => 30],
+            ['name' => 'Quotation', 'slug' => 'quotation', 'type_slug' => 'quote', 'summary' => 'Scoped estimate for your build', 'display_order' => 40],
+            ['name' => 'Contact', 'slug' => 'contact', 'type_slug' => 'contact', 'summary' => 'General enquiry', 'display_order' => 50],
+            ['name' => 'Starter engagement', 'slug' => 'starter', 'type_slug' => 'purchase', 'summary' => 'Fixed discovery and roadmap pack', 'price_pence' => 250000, 'display_order' => 60],
         ];
         foreach ($offerings as $row) {
-            Offering::query()->firstOrCreate(['slug' => $row['slug']], $row);
+            $typeSlug = $row['type_slug'];
+            $typeId = $typesBySlug[$typeSlug] ?? null;
+
+            Offering::query()->firstOrCreate(
+                ['slug' => $row['slug']],
+                [
+                    'name' => $row['name'],
+                    'slug' => $row['slug'],
+                    'summary' => $row['summary'] ?? null,
+                    'type' => $typeSlug,
+                    'offering_type_id' => $typeId,
+                    'price_pence' => $row['price_pence'] ?? null,
+                    'display_order' => $row['display_order'] ?? 0,
+                ]
+            );
         }
 
         ContentBlock::query()->updateOrCreate(

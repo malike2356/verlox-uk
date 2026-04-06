@@ -10,11 +10,12 @@
         <div><label class="text-xs text-gray-500 dark:text-slate-500">Slug</label><input name="slug" value="{{ $offering->slug }}" required class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-950 px-3 py-2 text-gray-900 dark:text-white"></div>
         <div><label class="text-xs text-gray-500 dark:text-slate-500">Summary</label><input name="summary" value="{{ $offering->summary }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-950 px-3 py-2 text-gray-900 dark:text-white"></div>
         <div><label class="text-xs text-gray-500 dark:text-slate-500">Type</label>
-            <select name="type" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-950 px-3 py-2 text-gray-900 dark:text-white">
-                @foreach (['demo','purchase','trial','consultation','quote','contact'] as $t)
-                    <option value="{{ $t }}" @selected($offering->type === $t)>{{ $t }}</option>
+            <select name="offering_type_id" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-950 px-3 py-2 text-gray-900 dark:text-white" required>
+                @foreach ($types as $t)
+                    <option value="{{ $t->id }}" @selected((int) $offering->offering_type_id === (int) $t->id)>{{ $t->name }}</option>
                 @endforeach
             </select>
+            <p class="mt-1 text-xs text-gray-400 dark:text-slate-500">Manage types in <a class="text-verlox-accent hover:underline" href="{{ route('mis.offering-types.index') }}">Offering types</a>.</p>
         </div>
         <div><label class="text-xs text-gray-500 dark:text-slate-500">Price (pence)</label><input type="number" name="price_pence" value="{{ $offering->price_pence }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-950 px-3 py-2 text-gray-900 dark:text-white"></div>
         <div><label class="text-xs text-gray-500 dark:text-slate-500">Currency</label><input name="currency" value="{{ $offering->currency }}" maxlength="3" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-950 px-3 py-2 text-gray-900 dark:text-white"></div>

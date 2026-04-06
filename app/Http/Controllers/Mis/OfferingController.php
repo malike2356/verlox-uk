@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mis;
 
 use App\Http\Controllers\Controller;
 use App\Models\Offering;
+use App\Models\OfferingType;
 use App\Models\PricingPlan;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,14 +15,23 @@ class OfferingController extends Controller
 {
     public function index(): View
     {
-        $offerings = Offering::query()->orderBy('display_order')->get();
+        $offerings = Offering::query()
+            ->with('offeringType')
+            ->orderBy('display_order')
+            ->get();
 
         return view('mis.offerings.index', compact('offerings'));
     }
 
     public function create(): View
     {
-        return view('mis.offerings.create');
+        $types = OfferingType::query()
+            ->where('is_active', true)
+            ->orderBy('display_order')
+            ->orderBy('name')
+            ->get();
+
+        return view('mis.offerings.create', compact('types'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -31,7 +41,7 @@ class OfferingController extends Controller
             'slug' => ['nullable', 'string', 'max:255'],
             'summary' => ['nullable', 'string', 'max:500'],
             'description' => ['nullable', 'string', 'max:20000'],
-            'type' => ['required', 'in:demo,purchase,trial,consultation,quote,contact'],
+            'offering_type_id' => ['required', 'integer', 'exists:offering_types,id'],
             'display_order' => ['nullable', 'integer', 'min:0'],
             'price_pence' => ['nullable', 'integer', 'min:0'],
             'currency' => ['nullable', 'string', 'size:3'],
@@ -45,12 +55,15 @@ class OfferingController extends Controller
             $slug = $base.'-'.$i;
             $i++;
         }
+        $type = OfferingType::query()->findOrFail($data['offering_type_id']);
         Offering::create([
             'name' => $data['name'],
             'slug' => $slug,
             'summary' => $data['summary'] ?? null,
             'description' => $data['description'] ?? null,
-            'type' => $data['type'],
+            'offering_type_id' => $type->id,
+            // Keep legacy column populated for backwards compatibility.
+            'type' => $type->slug,
             'display_order' => $data['display_order'] ?? 0,
             'price_pence' => $data['price_pence'] ?? null,
             'currency' => strtoupper($data['currency'] ?? 'GBP'),
@@ -63,7 +76,12 @@ class OfferingController extends Controller
 
     public function edit(Offering $offering): View
     {
-        return view('mis.offerings.edit', compact('offering'));
+        $types = OfferingType::query()
+            ->orderBy('display_order')
+            ->orderBy('name')
+            ->get();
+
+        return view('mis.offerings.edit', compact('offering', 'types'));
     }
 
     public function update(Request $request, Offering $offering): RedirectResponse
@@ -73,15 +91,18 @@ class OfferingController extends Controller
             'slug' => ['required', 'string', 'max:255', 'unique:offerings,slug,'.$offering->id],
             'summary' => ['nullable', 'string', 'max:500'],
             'description' => ['nullable', 'string', 'max:20000'],
-            'type' => ['required', 'in:demo,purchase,trial,consultation,quote,contact'],
+            'offering_type_id' => ['required', 'integer', 'exists:offering_types,id'],
             'display_order' => ['nullable', 'integer', 'min:0'],
             'price_pence' => ['nullable', 'integer', 'min:0'],
             'currency' => ['nullable', 'string', 'size:3'],
             'stripe_price_id' => ['nullable', 'string', 'max:255'],
             'is_active' => ['nullable', 'boolean'],
         ]);
+        $type = OfferingType::query()->findOrFail($data['offering_type_id']);
         $offering->update([
             ...$data,
+            // keep legacy column populated for any old code paths
+            'type' => $type->slug,
             'currency' => strtoupper($data['currency'] ?? 'GBP'),
             'is_active' => $request->boolean('is_active'),
         ]);

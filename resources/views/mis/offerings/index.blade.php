@@ -15,7 +15,7 @@
             @foreach ($offerings as $o)
                 <tr>
                     <td class="px-3 py-2 text-gray-900 dark:text-white">{{ $o->name }}</td>
-                    <td class="px-3 py-2 text-gray-500 dark:text-slate-500">{{ $o->type }}</td>
+                    <td class="px-3 py-2 text-gray-500 dark:text-slate-500">{{ $o->offeringType?->name ?? $o->type }}</td>
                     <td class="px-3 py-2 font-mono text-gray-600 dark:text-slate-400">@if($o->price_pence){{ number_format($o->price_pence/100,2) }} {{ $o->currency }}@else - @endif</td>
                     <td class="px-3 py-2">{{ $o->is_active ? 'yes' : 'no' }}</td>
                     <td class="px-3 py-2 flex flex-wrap gap-2">

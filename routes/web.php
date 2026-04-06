@@ -27,6 +27,7 @@ use App\Http\Controllers\Mis\LeadController as MisLeadController;
 use App\Http\Controllers\Mis\LeadConvertController;
 use App\Http\Controllers\Mis\NetworkMapController;
 use App\Http\Controllers\Mis\OfferingController as MisOfferingController;
+use App\Http\Controllers\Mis\OfferingTypeController as MisOfferingTypeController;
 use App\Http\Controllers\Mis\PipelineBoardController;
 use App\Http\Controllers\Mis\PipelineStageController;
 use App\Http\Controllers\Mis\PricingPlanController;
@@ -160,6 +161,13 @@ Route::middleware(['auth', 'verified', 'mis.access'])->prefix('mis')->name('mis.
         Route::delete('/bookings-meta/overrides/{bookingDateOverride}', [MisBookingController::class, 'destroyOverride'])->name('bookings.overrides.destroy');
 
         Route::delete('/bookings/{booking}', [MisBookingController::class, 'destroy'])->name('bookings.destroy');
+
+        Route::get('/offering-types', [MisOfferingTypeController::class, 'index'])->name('offering-types.index');
+        Route::get('/offering-types/create', [MisOfferingTypeController::class, 'create'])->name('offering-types.create');
+        Route::post('/offering-types', [MisOfferingTypeController::class, 'store'])->name('offering-types.store');
+        Route::get('/offering-types/{offeringType}/edit', [MisOfferingTypeController::class, 'edit'])->name('offering-types.edit');
+        Route::patch('/offering-types/{offeringType}', [MisOfferingTypeController::class, 'update'])->name('offering-types.update');
+        Route::delete('/offering-types/{offeringType}', [MisOfferingTypeController::class, 'destroy'])->name('offering-types.destroy');
 
         Route::get('/offerings', [MisOfferingController::class, 'index'])->name('offerings.index');
         Route::get('/offerings/create', [MisOfferingController::class, 'create'])->name('offerings.create');
