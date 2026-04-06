@@ -12,7 +12,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-verlox-page text-gray-900 dark:text-[#E5E7EB]">
-<main class="max-w-[min(100%,70rem)] mx-auto px-4 py-10">
+<main class="max-w-[min(100%,60rem)] mx-auto px-4 py-10">
     <div class="flex items-center justify-between gap-3 mb-6">
         <a class="text-sm text-verlox-accent text-verlox-accent-hover" href="{{ url('/') }}">← Back to site</a>
         <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle colour mode">
@@ -21,7 +21,7 @@
         </button>
     </div>
 
-    <article class="rounded-2xl border border-gray-200 dark:border-slate-700 bg-white/80 dark:bg-[#0F223C] p-6 sm:p-8 prose prose-slate max-w-none dark:prose-invert">
+    <article class="mx-auto max-w-3xl rounded-2xl border border-gray-200 dark:border-slate-700 bg-white/80 dark:bg-[#0F223C] p-6 sm:p-8 prose prose-slate dark:prose-invert">
         <header class="mb-6">
             <h1 class="font-display">{{ $doc->title }}</h1>
             @if($doc->effective_at)
