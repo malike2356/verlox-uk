@@ -1,8 +1,8 @@
-<section class="rounded-2xl border border-red-200 dark:border-red-900/50 bg-white/90 dark:bg-slate-900/40 p-4 space-y-4">
+<section class="rounded-2xl border border-red-200 dark:border-red-900/50 bg-white/90 dark:bg-slate-900/40 p-4 space-y-2">
     <header>
         <h2 class="text-xs font-semibold uppercase tracking-wide text-red-800 dark:text-red-300">{{ __('Delete account') }}</h2>
-        <p class="mt-1 text-sm text-gray-600 dark:text-slate-400">
-            {{ __('Permanently delete this account and associated access. Download anything you need first. This cannot be undone.') }}
+        <p class="mt-0.5 text-xs text-gray-600 dark:text-slate-400 leading-snug">
+            {{ __('Permanently delete this account. This cannot be undone.') }}
         </p>
     </header>
 

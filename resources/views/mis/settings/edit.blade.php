@@ -4,46 +4,52 @@
 @section('heading', 'Company settings')
 
 @section('content')
-    <div class="mx-auto max-w-6xl">
-    <form method="post" action="{{ route('mis.settings.update') }}" enctype="multipart/form-data" class="space-y-8 text-sm">
+    <div class="mx-auto max-w-7xl w-full">
+    <form method="post" action="{{ route('mis.settings.update') }}" enctype="multipart/form-data" class="space-y-5 text-sm">
         @csrf @method('patch')
 
-        <div class="grid gap-6 md:grid-cols-2 md:items-start">
-            <div class="space-y-6">
+        <div class="grid gap-4 lg:grid-cols-2 xl:grid-cols-12 xl:items-start">
+            <div class="space-y-4 xl:col-span-6">
                 <section class="rounded-2xl border border-gray-200 dark:border-slate-600 bg-white/90 dark:bg-slate-900/40 p-4 space-y-3">
                     <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-slate-300">Company</h2>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Legal name</label><input name="company_name" value="{{ $settings->company_name }}" required class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Tagline</label><input name="tagline" value="{{ $settings->tagline }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Website</label><input name="website_url" value="{{ $settings->website_url }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
-                    <div class="grid sm:grid-cols-2 gap-3">
-                        <div><label class="text-xs text-gray-500 dark:text-slate-300">Companies House no.</label><input name="registration_number" value="{{ $settings->registration_number }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
-                        <div><label class="text-xs text-gray-500 dark:text-slate-300">VAT number</label><input name="vat_number" value="{{ $settings->vat_number }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                    <div class="grid gap-3 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
+                        <div class="min-w-0 sm:col-span-2 xl:col-span-1"><label class="text-xs text-gray-500 dark:text-slate-300">Legal name</label><input name="company_name" value="{{ $settings->company_name }}" required class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Tagline</label><input name="tagline" value="{{ $settings->tagline }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                        <div class="min-w-0 sm:col-span-2 xl:col-span-1"><label class="text-xs text-gray-500 dark:text-slate-300">Website</label><input name="website_url" value="{{ $settings->website_url }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
                     </div>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Tax reference</label><input name="tax_reference" value="{{ $settings->tax_reference }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Address line 1</label><input name="address_line1" value="{{ $settings->address_line1 }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Address line 2</label><input name="address_line2" value="{{ $settings->address_line2 }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
-                    <div class="grid sm:grid-cols-2 gap-3">
-                        <div><label class="text-xs text-gray-500 dark:text-slate-300">City</label><input name="city" value="{{ $settings->city }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
-                        <div><label class="text-xs text-gray-500 dark:text-slate-300">Postcode</label><input name="postcode" value="{{ $settings->postcode }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                    <div class="grid gap-3 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Companies House no.</label><input name="registration_number" value="{{ $settings->registration_number }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">VAT number</label><input name="vat_number" value="{{ $settings->vat_number }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                        <div class="min-w-0 sm:col-span-2 xl:col-span-1"><label class="text-xs text-gray-500 dark:text-slate-300">Tax reference</label><input name="tax_reference" value="{{ $settings->tax_reference }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
                     </div>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Country</label><input name="country" value="{{ $settings->country }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
-                    <div class="grid sm:grid-cols-2 gap-3">
-                        <div><label class="text-xs text-gray-500 dark:text-slate-300">Phone</label><input name="phone" value="{{ $settings->phone }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
-                        <div><label class="text-xs text-gray-500 dark:text-slate-300">Support email</label><input type="email" name="support_email" value="{{ $settings->support_email }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                    <div class="grid gap-3 grid-cols-1 md:grid-cols-2">
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Address line 1</label><input name="address_line1" value="{{ $settings->address_line1 }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Address line 2</label><input name="address_line2" value="{{ $settings->address_line2 }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                    </div>
+                    <div class="grid gap-3 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">City</label><input name="city" value="{{ $settings->city }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Postcode</label><input name="postcode" value="{{ $settings->postcode }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                        <div class="min-w-0 sm:col-span-2 xl:col-span-1"><label class="text-xs text-gray-500 dark:text-slate-300">Country</label><input name="country" value="{{ $settings->country }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                    </div>
+                    <div class="grid gap-3 grid-cols-1 sm:grid-cols-2">
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Phone</label><input name="phone" value="{{ $settings->phone }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Support email</label><input type="email" name="support_email" value="{{ $settings->support_email }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
                     </div>
                 </section>
 
                 <section class="rounded-2xl border border-gray-200 dark:border-slate-600 bg-white/90 dark:bg-slate-900/40 p-4 space-y-3">
                     <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-slate-300">Email sending</h2>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">From name</label><input name="mail_from_name" value="{{ $settings->mail_from_name }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">From address</label><input type="email" name="mail_from_address" value="{{ $settings->mail_from_address }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Reply-To</label><input type="email" name="mail_reply_to" value="{{ $settings->mail_reply_to }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                    <div class="grid gap-3 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">From name</label><input name="mail_from_name" value="{{ $settings->mail_from_name }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">From address</label><input type="email" name="mail_from_address" value="{{ $settings->mail_from_address }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                        <div class="min-w-0 md:col-span-2 xl:col-span-1"><label class="text-xs text-gray-500 dark:text-slate-300">Reply-To</label><input type="email" name="mail_reply_to" value="{{ $settings->mail_reply_to }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                    </div>
                 </section>
 
                 <section class="rounded-2xl border border-gray-200 dark:border-slate-600 bg-white/90 dark:bg-slate-900/40 p-4 space-y-3">
                     <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-slate-300">Brand</h2>
                     <p class="text-xs text-gray-500 dark:text-slate-300">Files are stored in <span class="font-mono text-gray-900 dark:text-slate-200">storage/app/public/company-branding</span> and served at <span class="font-mono text-gray-900 dark:text-slate-200">/storage/…</span> (run <span class="font-mono text-gray-900 dark:text-slate-200">php artisan storage:link</span> if images 404).</p>
-                    <div class="grid gap-4 sm:grid-cols-1">
+                    <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                         <div class="rounded-lg border border-gray-200 dark:border-slate-700 p-3 space-y-2">
                             <label class="text-xs font-medium text-gray-600 dark:text-slate-300">Favicon</label>
                             <p class="text-xs text-gray-500 dark:text-slate-300">Browser tab; ICO, PNG, SVG, or WebP (max 512&nbsp;KB).</p>
@@ -80,29 +86,35 @@
                             @endif
                         </div>
                     </div>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Primary colour (hex)</label><input name="primary_hex" value="{{ $settings->primary_hex }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono"></div>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Footer HTML (legal)</label><textarea name="footer_legal_html" rows="4" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs">{{ $settings->footer_legal_html }}</textarea></div>
+                    <div class="grid gap-3 grid-cols-1 lg:grid-cols-[minmax(0,12rem)_1fr] items-start">
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Primary colour (hex)</label><input name="primary_hex" value="{{ $settings->primary_hex }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono"></div>
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Footer HTML (legal)</label><textarea name="footer_legal_html" rows="3" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs">{{ $settings->footer_legal_html }}</textarea></div>
+                    </div>
                 </section>
             </div>
 
-            <div class="space-y-6">
+            <div class="space-y-4 xl:col-span-6">
                 <section class="rounded-2xl border border-gray-200 dark:border-slate-600 bg-white/90 dark:bg-slate-900/40 p-4 space-y-3">
                     <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-slate-300">Stripe</h2>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Publishable key</label><input name="stripe_publishable_key" value="{{ $settings->stripe_publishable_key }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs"></div>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Secret key</label><input name="stripe_secret_key" value="{{ $settings->stripe_secret_key }}" type="password" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs" autocomplete="new-password"></div>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Webhook signing secret</label><input name="stripe_webhook_secret" value="{{ $settings->stripe_webhook_secret }}" type="password" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs" autocomplete="new-password"></div>
-                    <p class="text-xs text-gray-500 dark:text-slate-300">Webhook URL: <span class="font-mono text-gray-700 dark:text-slate-300">{{ url('/webhooks/stripe') }}</span></p>
+                    <div class="grid gap-3 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Publishable key</label><input name="stripe_publishable_key" value="{{ $settings->stripe_publishable_key }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs"></div>
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Secret key</label><input name="stripe_secret_key" value="{{ $settings->stripe_secret_key }}" type="password" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs" autocomplete="new-password"></div>
+                        <div class="min-w-0 md:col-span-2 xl:col-span-1"><label class="text-xs text-gray-500 dark:text-slate-300">Webhook signing secret</label><input name="stripe_webhook_secret" value="{{ $settings->stripe_webhook_secret }}" type="password" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs" autocomplete="new-password"></div>
+                    </div>
+                    <p class="text-xs text-gray-500 dark:text-slate-300">Webhook URL: <span class="font-mono text-gray-700 dark:text-slate-300 break-all">{{ url('/webhooks/stripe') }}</span></p>
                 </section>
 
                 <section id="zoho-books" class="rounded-2xl border border-gray-200 dark:border-slate-600 bg-white/90 dark:bg-slate-900/40 p-4 space-y-3 scroll-mt-24">
                     <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-slate-300">Zoho Books (OAuth)</h2>
                     <p class="text-xs text-gray-500 dark:text-slate-300">Create a self-client or server-based app in Zoho API Console, then paste refresh token and org id. Use the Zoho page to test the connection.</p>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Client id</label><input name="zoho_client_id" value="{{ $settings->zoho_client_id }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs"></div>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Client secret</label><input name="zoho_client_secret" value="{{ $settings->zoho_client_secret }}" type="password" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs" autocomplete="new-password"></div>
+                    <div class="grid gap-3 grid-cols-1 md:grid-cols-2">
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Client id</label><input name="zoho_client_id" value="{{ $settings->zoho_client_id }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs"></div>
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Client secret</label><input name="zoho_client_secret" value="{{ $settings->zoho_client_secret }}" type="password" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs" autocomplete="new-password"></div>
+                    </div>
                     <div><label class="text-xs text-gray-500 dark:text-slate-300">Refresh token</label><textarea name="zoho_refresh_token" rows="2" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs">{{ $settings->zoho_refresh_token }}</textarea></div>
-                    <div class="grid sm:grid-cols-2 gap-3">
-                        <div><label class="text-xs text-gray-500 dark:text-slate-300">Organization id</label><input name="zoho_org_id" value="{{ $settings->zoho_org_id }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs"></div>
-                        <div><label class="text-xs text-gray-500 dark:text-slate-300">Data center</label>
+                    <div class="grid gap-3 grid-cols-1 sm:grid-cols-2">
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Organization id</label><input name="zoho_org_id" value="{{ $settings->zoho_org_id }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs"></div>
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Data center</label>
                             <select name="zoho_dc" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900">
                                 @foreach (['com','eu','in','au'] as $dc)
                                     <option value="{{ $dc }}" @selected($settings->zoho_dc === $dc)>{{ $dc }}</option>
@@ -128,22 +140,22 @@
 
                 <section class="rounded-2xl border border-gray-200 dark:border-slate-600 bg-white/90 dark:bg-slate-900/40 p-4 space-y-3">
                     <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-slate-300">Booking embed</h2>
-                    <p class="text-xs text-gray-500 dark:text-slate-300">Public scheduler: <span class="font-mono text-gray-700 dark:text-slate-300">{{ url('/embed/booking') }}</span> · Embed iframe or link from your marketing site.</p>
-                    <div class="grid sm:grid-cols-2 gap-3">
-                        <div><label class="text-xs text-gray-500 dark:text-slate-300">Slot length (minutes)</label><input type="number" name="booking_slot_minutes" value="{{ $settings->booking_slot_minutes }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
-                        <div><label class="text-xs text-gray-500 dark:text-slate-300">Buffer after each meeting (minutes)</label><input type="number" name="booking_buffer_minutes" value="{{ $settings->booking_buffer_minutes ?? 0 }}" min="0" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                    <p class="text-xs text-gray-500 dark:text-slate-300">Public scheduler: <span class="font-mono text-gray-700 dark:text-slate-300 break-all">{{ url('/embed/booking') }}</span> · Embed iframe or link from your marketing site.</p>
+                    <div class="grid gap-3 grid-cols-2 xl:grid-cols-4">
+                        <div class="min-w-0 sm:col-span-1"><label class="text-xs text-gray-500 dark:text-slate-300">Slot (min)</label><input type="number" name="booking_slot_minutes" value="{{ $settings->booking_slot_minutes }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                        <div class="min-w-0 sm:col-span-1"><label class="text-xs text-gray-500 dark:text-slate-300">Buffer (min)</label><input type="number" name="booking_buffer_minutes" value="{{ $settings->booking_buffer_minutes ?? 0 }}" min="0" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                        <div class="min-w-0 sm:col-span-1"><label class="text-xs text-gray-500 dark:text-slate-300">Min notice (h)</label><input type="number" name="booking_min_notice_hours" value="{{ $settings->booking_min_notice_hours ?? 2 }}" min="0" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                        <div class="min-w-0 sm:col-span-1"><label class="text-xs text-gray-500 dark:text-slate-300">Max days ahead</label><input type="number" name="booking_max_days_ahead" value="{{ $settings->booking_max_days_ahead ?? 60 }}" min="1" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
                     </div>
-                    <div class="grid sm:grid-cols-2 gap-3">
-                        <div><label class="text-xs text-gray-500 dark:text-slate-300">Minimum notice (hours)</label><input type="number" name="booking_min_notice_hours" value="{{ $settings->booking_min_notice_hours ?? 2 }}" min="0" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
-                        <div><label class="text-xs text-gray-500 dark:text-slate-300">Max days ahead bookable</label><input type="number" name="booking_max_days_ahead" value="{{ $settings->booking_max_days_ahead ?? 60 }}" min="1" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
+                    <div class="grid gap-3 grid-cols-1 md:grid-cols-2">
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Default timezone (IANA)</label><input name="booking_timezone" value="{{ $settings->booking_timezone }}" placeholder="Europe/London" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs"></div>
+                        <div class="min-w-0"><label class="text-xs text-gray-500 dark:text-slate-300">Meeting provider label</label><input name="meeting_provider" value="{{ $settings->meeting_provider }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
                     </div>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Default timezone (IANA)</label><input name="booking_timezone" value="{{ $settings->booking_timezone }}" placeholder="Europe/London" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs"></div>
                     <div><label class="text-xs text-gray-500 dark:text-slate-300">Meeting link (Zoom or Meet URL)</label><textarea name="meeting_link_template" rows="2" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900 font-mono text-xs">{{ $settings->meeting_link_template }}</textarea></div>
-                    <div><label class="text-xs text-gray-500 dark:text-slate-300">Meeting provider label</label><input name="meeting_provider" value="{{ $settings->meeting_provider }}" class="mt-1 w-full rounded-lg border border-gray-200 dark:border-slate-600 bg-gray-50 dark:!bg-slate-800 dark:!text-slate-100 dark:[color-scheme:dark] px-3 py-2 text-gray-900"></div>
                 </section>
             </div>
 
-            <div class="md:col-span-2 pt-2">
+            <div class="lg:col-span-2 xl:col-span-12 flex flex-wrap items-center justify-between gap-3 border-t border-gray-200/80 dark:border-slate-700/80 pt-4">
                 <button type="submit" class="rounded-xl bg-verlox-accent px-6 py-3 text-sm font-semibold text-on-verlox-accent">Save all settings</button>
             </div>
         </div>
