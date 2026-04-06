@@ -1,28 +1,47 @@
-# Secrets & credentials
+# Project secrets & credentials (never commit)
 .access.deploy
 .access.config
-*.env
+.access.*
+
+# Laravel env (keep example committed)
+.env
 .env.*
+!.env.example
 
-# Deploy scripts (contain or reference secrets)
-deploy_verlox_uk.sh
-
-# Local backups (never commit)
+# Local backups / mirrored folders (never commit)
 backup/
 backup/**
+
+# Dependencies / build output
+/vendor/
+/node_modules/
+/public/build/
+/public/hot/
+/public/storage
+
+# Runtime / caches
+/.phpunit.result.cache
+/.phpunit.cache/
+/storage/*.key
+/storage/pail
+/storage/logs/
+/storage/framework/cache/
+/storage/framework/sessions/
+/storage/framework/views/
 
 # Logs
 *.log
 spam-blocked.log
 
-# Rate-limit temp files
-/tmp/verlox_contact_rl/
-
 # Editor
-.vscode/
-.idea/
+/.vscode/
+/.idea/
 *.swp
 *.swo
+/.zed/
+/.fleet/
+/.nova/
+.phpactor.json
 
 # OS
 .DS_Store
