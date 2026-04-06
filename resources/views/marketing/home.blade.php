@@ -31,7 +31,7 @@
                     <h1 class="hero__title">{!! $heroTitleHtml !!}</h1>
                     <div class="hero__subtitle hero__subtitle--rich">{!! $heroSubtitleHtml !!}</div>
                     <div class="hero__cta">
-                        <a class="btn btn--primary" href="#contact">Request a callback</a>
+                        <a class="btn btn--primary" href="{{ route('marketing.contact') }}">Request a callback</a>
                         <a class="btn btn--ghost" href="#work">See our services</a>
                     </div>
                 </div>
