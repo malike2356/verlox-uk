@@ -1,0 +1,60 @@
+{
+  "_module.esm-Lx3yN53I.js": {
+    "file": "assets/module.esm-Lx3yN53I.js",
+    "name": "module.esm"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-DG1oafIx.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/css/marketing-site.css": {
+    "file": "assets/marketing-site-D0SACQJZ.css",
+    "src": "resources/css/marketing-site.css",
+    "isEntry": true,
+    "name": "marketing-site",
+    "names": [
+      "marketing-site.css"
+    ]
+  },
+  "resources/css/mis-overrides.css": {
+    "file": "assets/mis-overrides-BxxA5AAw.css",
+    "src": "resources/css/mis-overrides.css",
+    "isEntry": true,
+    "name": "mis-overrides",
+    "names": [
+      "mis-overrides.css"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BxppFYUM.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_module.esm-Lx3yN53I.js"
+    ]
+  },
+  "resources/js/marketing-book.js": {
+    "file": "assets/marketing-book-rZYJaBCZ.js",
+    "name": "marketing-book",
+    "src": "resources/js/marketing-book.js",
+    "isEntry": true,
+    "imports": [
+      "_module.esm-Lx3yN53I.js"
+    ],
+    "css": [
+      "assets/marketing-book-B6C-QcC-.css"
+    ]
+  },
+  "resources/js/marketing-home.js": {
+    "file": "assets/marketing-home-GXFmWTVw.js",
+    "name": "marketing-home",
+    "src": "resources/js/marketing-home.js",
+    "isEntry": true
+  }
+}
