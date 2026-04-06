@@ -22,6 +22,8 @@ class LeadCaptureController extends Controller
             'email' => ['required', 'email', 'max:255'],
             'phone' => ['nullable', 'string', 'max:64'],
             'company_name' => ['nullable', 'string', 'max:255'],
+            'business_type' => ['nullable', 'string', 'max:255'],
+            'interest' => ['nullable', 'string', 'max:64'],
             'message' => ['nullable', 'string', 'max:10000'],
             'offering_id' => ['nullable', 'exists:offerings,id'],
             'source' => ['nullable', 'string', 'max:64'],
@@ -74,6 +76,11 @@ class LeadCaptureController extends Controller
             }
             $lead = $existing;
         } else {
+            $meta = array_filter([
+                'business_type' => $data['business_type'] ?? null,
+                'interest' => $data['interest'] ?? null,
+            ], fn ($v) => $v !== null && $v !== '');
+
             $lead = Lead::create(array_merge([
                 'pipeline_stage_id' => $stage->id,
                 'offering_id' => $offeringId,
@@ -84,6 +91,7 @@ class LeadCaptureController extends Controller
                 'message' => $data['message'] ?? null,
                 'source' => $source,
                 'status' => 'new',
+                'meta' => $meta === [] ? null : $meta,
             ], $utmPayload));
         }
 
@@ -105,6 +113,7 @@ class LeadCaptureController extends Controller
 
         $anchor = match (true) {
             Str::startsWith($source, 'web:contact') => '#contact',
+            Str::startsWith($source, 'web:contact-page') => '#contact-form',
             Str::startsWith($source, 'web:va') => '#enquiry',
             default => null,
         };

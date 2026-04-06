@@ -19,7 +19,7 @@
             <a class="nav__link" href="{{ url('/#builds') }}">Portfolio</a>
             <a class="nav__link {{ request()->routeIs('marketing.virtual-assistant') ? 'nav__link--active' : '' }}" href="{{ route('marketing.virtual-assistant') }}">Virtual assistants</a>
             <a class="nav__link {{ request()->routeIs('marketing.book') ? 'nav__link--active' : '' }}" href="{{ route('marketing.book') }}">Book a call</a>
-            <a class="btn btn--primary" href="{{ url('/#contact') }}">Request a callback</a>
+            <a class="btn btn--primary" href="{{ route('marketing.contact') }}">Request a callback</a>
         </nav>
 
         <a class="nav__link topbar__staff-login" href="{{ route('login') }}">Staff login</a>

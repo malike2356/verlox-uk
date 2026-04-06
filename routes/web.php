@@ -3,6 +3,7 @@
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LeadCaptureController;
 use App\Http\Controllers\Marketing\BookController;
+use App\Http\Controllers\Marketing\ContactController;
 use App\Http\Controllers\Marketing\HomeController;
 use App\Http\Controllers\Marketing\VirtualAssistantController;
 use App\Http\Controllers\Mis\BookingController as MisBookingController;
@@ -51,6 +52,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomeController::class)->name('marketing.home');
 Route::get('/virtual-assistant', VirtualAssistantController::class)->name('marketing.virtual-assistant');
 Route::get('/book', BookController::class)->name('marketing.book');
+Route::get('/contact', ContactController::class)->name('marketing.contact');
 Route::post('/leads', [LeadCaptureController::class, 'store'])->name('leads.store');
 Route::get('/legal/{slug}', [PublicLegalController::class, 'show'])->name('legal.show');
 
