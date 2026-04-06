@@ -24,12 +24,34 @@ DEPLOY_REMOTE="${DEPLOY_REMOTE:-origin}"
 DEPLOY_BRANCH="${DEPLOY_BRANCH:-main}"
 DEPLOY_TARGETS="${DEPLOY_TARGETS:-}"
 DEPLOY_AFTER_PULL="${DEPLOY_AFTER_PULL:-}"
+DEPLOY_ENV_FILE="${DEPLOY_ENV_FILE:-}"
 
 cd "$ROOT_DIR"
 
+if [[ -n "$DEPLOY_ENV_FILE" ]]; then
+  if [[ ! -f "$DEPLOY_ENV_FILE" ]]; then
+    echo "DEPLOY_ENV_FILE not found: $DEPLOY_ENV_FILE" >&2
+    exit 2
+  fi
+  # Support both:
+  # - export KEY=value
+  # - KEY=value
+  # by temporarily enabling "auto-export".
+  set -a
+  # shellcheck disable=SC1090
+  source "$DEPLOY_ENV_FILE"
+  set +a
+fi
+
 echo "==> Deploy: push ${DEPLOY_BRANCH} to ${DEPLOY_REMOTE}"
 git rev-parse --is-inside-work-tree >/dev/null
-git push "$DEPLOY_REMOTE" "$DEPLOY_BRANCH"
+
+# If you provide GITHUB_TOKEN, we can push non-interactively even when origin is HTTPS.
+if [[ -n "${GITHUB_TOKEN:-}" && "$DEPLOY_REMOTE" == "origin" ]]; then
+  git push "https://x-access-token:${GITHUB_TOKEN}@github.com/malike2356/verlox-uk.git" "$DEPLOY_BRANCH"
+else
+  git push "$DEPLOY_REMOTE" "$DEPLOY_BRANCH"
+fi
 
 if [[ -z "$DEPLOY_TARGETS" ]]; then
   echo "==> No DEPLOY_TARGETS set; push complete."
