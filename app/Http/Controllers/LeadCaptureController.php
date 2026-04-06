@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class LeadCaptureController extends Controller
 {
@@ -97,6 +98,21 @@ class LeadCaptureController extends Controller
             return response()->json(['ok' => true, 'message' => 'Thank you. We have received your request and will respond shortly.']);
         }
 
-        return back()->with('status', 'Thank you. We have received your request and will respond shortly.');
+        $status = 'Thank you. We have received your request and will respond shortly.';
+
+        $source = (string) ($data['source'] ?? '');
+        $referer = (string) $request->headers->get('referer', '');
+
+        $anchor = match (true) {
+            Str::startsWith($source, 'web:contact') => '#contact',
+            Str::startsWith($source, 'web:va') => '#enquiry',
+            default => null,
+        };
+
+        if ($anchor && $referer !== '') {
+            return redirect()->to($referer.$anchor)->with('status', $status);
+        }
+
+        return back()->with('status', $status);
     }
 }

@@ -117,6 +117,23 @@ html[data-theme='dark'] .mis-shell-main main.mis-main .mis-google-calendar-conne
     color: #fff !important;
 }
 
+/*
+ * Pipeline board: avoid Bootstrap `.bg-white { ... !important }` and low-contrast slate.
+ * Force readable card/column surfaces when the MIS theme is dark.
+ */
+html.dark .mis-shell-main main.mis-main .mis-pipeline-col,
+html[data-theme='dark'] .mis-shell-main main.mis-main .mis-pipeline-col {
+    background-color: #071426 !important;
+    border-color: rgb(71 85 105) !important;
+}
+
+html.dark .mis-shell-main main.mis-main .mis-pipeline-card,
+html[data-theme='dark'] .mis-shell-main main.mis-main .mis-pipeline-card {
+    background-color: #0f223c !important;
+    border-color: rgb(100 116 139) !important;
+    box-shadow: none !important;
+}
+
 /* Light theme: avoid Tailwind `bg-white` on this control (Bootstrap gives `.bg-white { !important }`). */
 .mis-shell-main main.mis-main .mis-google-calendar-connect {
     display: inline-flex;

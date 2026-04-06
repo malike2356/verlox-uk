@@ -18,21 +18,21 @@
             <div id="pipeline-board" class="inline-flex gap-3">
                 @foreach ($stages as $stage)
                     @php $stageLeads = $leads->get($stage->id) ?? collect(); @endphp
-                    <div class="flex-shrink-0 w-72 flex flex-col rounded-2xl border border-gray-200 dark:border-slate-800 bg-gray-50/80 dark:bg-slate-900/50 max-h-[70vh]">
-                        <div class="px-3 py-2 border-b border-gray-200 dark:border-slate-800 flex items-center gap-2">
+                    <div class="mis-pipeline-col flex-shrink-0 w-72 flex flex-col rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50/90 dark:bg-[#071426] max-h-[70vh]">
+                        <div class="px-3 py-2 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
                             <span class="h-2.5 w-2.5 rounded-full shrink-0" style="background: {{ $stage->color_hex }}"></span>
                             <span class="text-sm font-semibold text-gray-900 dark:text-white truncate">{{ $stage->name }}</span>
-                            <span class="text-xs text-gray-500 dark:text-slate-500 ml-auto">{{ $stageLeads->count() }}</span>
+                            <span class="text-xs text-slate-600 dark:text-slate-300 ml-auto">{{ $stageLeads->count() }}</span>
                         </div>
                         <div class="kanban-list flex-1 overflow-y-auto p-2 space-y-2 min-h-[100px]"
                              data-stage-id="{{ $stage->id }}">
                             @foreach ($stageLeads as $lead)
-                                <div class="sortable-lead rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-[#0F223C] p-3 shadow-sm cursor-grab active:cursor-grabbing"
+                                <div class="mis-pipeline-card sortable-lead rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-[#0F223C] p-3 shadow-sm cursor-grab active:cursor-grabbing"
                                      data-lead-id="{{ $lead->id }}">
-                                    <a href="{{ route('mis.leads.show', $lead) }}" class="text-sm font-medium text-gray-900 dark:text-white hover:text-verlox-accent">{{ $lead->contact_name }}</a>
-                                    <p class="text-xs text-gray-500 dark:text-slate-500 truncate mt-0.5">{{ $lead->email }}</p>
+                                    <a href="{{ route('mis.leads.show', $lead) }}" class="text-sm font-semibold text-slate-900 dark:text-slate-50 hover:text-verlox-accent">{{ $lead->contact_name }}</a>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300 truncate mt-0.5">{{ $lead->email }}</p>
                                     @if($lead->offering)
-                                        <p class="text-[10px] uppercase tracking-wide text-gray-400 dark:text-slate-500 mt-1">{{ $lead->offering->name }}</p>
+                                        <p class="text-[10px] uppercase tracking-wide text-slate-500 dark:text-slate-400 mt-1">{{ $lead->offering->name }}</p>
                                     @endif
                                     @if($lead->deal_value_pence)
                                         <p class="text-[11px] font-mono text-emerald-700 dark:text-emerald-400 mt-1">£{{ number_format($lead->deal_value_pence / 100, 0) }}</p>
