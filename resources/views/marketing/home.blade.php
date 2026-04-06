@@ -10,7 +10,7 @@
 
 @section('content')
 @php
-    $contactEmail = $settings->support_email ?: 'contact@verlox.uk';
+    $contactEmail = $settings->support_email ?: 'contact@verlox.ukk';
     $contactMailto = 'mailto:'.$contactEmail;
 @endphp
 @include('marketing.partials.topbar')
@@ -31,7 +31,7 @@
                     <h1 class="hero__title">{!! $heroTitleHtml !!}</h1>
                     <div class="hero__subtitle hero__subtitle--rich">{!! $heroSubtitleHtml !!}</div>
                     <div class="hero__cta">
-                        <a class="btn btn--primary" href="#contact">Get a proposal</a>
+                        <a class="btn btn--primary" href="#contact">Request a callback</a>
                         <a class="btn btn--ghost" href="#work">See our services</a>
                     </div>
                 </div>

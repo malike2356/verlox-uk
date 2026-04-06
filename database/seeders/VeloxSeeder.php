@@ -21,9 +21,9 @@ class VeloxSeeder extends Seeder
         $settings->update([
             'company_name' => 'Verlox UK',
             'tagline' => 'Websites • Platforms • Automation',
-            'support_email' => 'hello@verlox.uk',
+            'support_email' => 'contact@verlox.ukk',
             'mail_from_name' => 'Verlox UK',
-            'mail_from_address' => 'hello@verlox.uk',
+            'mail_from_address' => 'contact@verlox.ukk',
             'address_line1' => 'United Kingdom',
         ]);
 

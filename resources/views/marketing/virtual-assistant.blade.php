@@ -12,7 +12,7 @@
 
 @section('content')
 @php
-    $contactEmail = $settings->support_email ?: 'contact@verlox.uk';
+    $contactEmail = $settings->support_email ?: 'contact@verlox.ukk';
     $contactMailto = 'mailto:'.$contactEmail;
 @endphp
 @include('marketing.partials.topbar')
