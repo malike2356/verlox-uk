@@ -6,10 +6,12 @@ use App\Models\BookingAvailabilityRule;
 use App\Models\CompanySetting;
 use App\Models\ContentBlock;
 use App\Models\ContractTemplate;
+use App\Models\LegalDocument;
 use App\Models\Offering;
 use App\Models\PipelineStage;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class VeloxSeeder extends Seeder
 {
@@ -114,6 +116,117 @@ class VeloxSeeder extends Seeder
                 'start_time' => '09:00:00',
                 'end_time' => '17:00:00',
             ]);
+        }
+
+        $effective = now()->toDateString();
+
+        $docs = [
+            [
+                'category' => 'privacy',
+                'title' => 'Privacy Policy',
+                'body_html' => implode("\n", [
+                    '<h1>Privacy Policy</h1>',
+                    '<p><strong>Effective date:</strong> '.$effective.'</p>',
+                    '<p>This policy explains how Verlox UK collects, uses, and protects personal data when you use our website and when you contact us for services. We aim to handle personal data in accordance with UK GDPR and the Data Protection Act 2018.</p>',
+                    '<h2>Who we are</h2>',
+                    '<p>Verlox UK (the “Company”) is the controller for personal data processed through this website and our engagement processes.</p>',
+                    '<p>If you have questions, contact us at <a href="mailto:hello@verlox.uk">hello@verlox.uk</a>.</p>',
+                    '<h2>What data we collect</h2>',
+                    '<ul>',
+                    '<li>Contact details (name, email, phone) when you submit an enquiry or communicate with us</li>',
+                    '<li>Project information you provide (requirements, timelines, budgets, and relevant context)</li>',
+                    '<li>Technical data (IP address, user agent, basic request logs) for security and operations</li>',
+                    '</ul>',
+                    '<h2>How we use your data</h2>',
+                    '<ul>',
+                    '<li>Respond to enquiries and provide proposals and services</li>',
+                    '<li>Operate and secure our systems, prevent abuse, and maintain audit logs</li>',
+                    '<li>Comply with legal obligations (e.g., accounting and tax)</li>',
+                    '</ul>',
+                    '<h2>Legal bases</h2>',
+                    '<ul>',
+                    '<li>Contract (to deliver services you request)</li>',
+                    '<li>Legitimate interests (to secure and improve our services)</li>',
+                    '<li>Legal obligation (where applicable)</li>',
+                    '</ul>',
+                    '<h2>Retention</h2>',
+                    '<p>We retain data only as long as necessary for the purposes above, including maintaining business records and complying with legal requirements.</p>',
+                    '<h2>Your rights</h2>',
+                    '<p>You may request access, correction, deletion, or restriction of your personal data. Email <a href="mailto:hello@verlox.uk">hello@verlox.uk</a>.</p>',
+                ]),
+            ],
+            [
+                'category' => 'terms',
+                'title' => 'Website Terms of Use',
+                'body_html' => implode("\n", [
+                    '<h1>Website Terms of Use</h1>',
+                    '<p><strong>Effective date:</strong> '.$effective.'</p>',
+                    '<p>These terms govern your use of the Verlox UK website. By accessing this website, you agree to these terms.</p>',
+                    '<h2>Use of the website</h2>',
+                    '<p>You may use the website for lawful purposes. You must not attempt to disrupt or compromise the site or its security.</p>',
+                    '<h2>Enquiries</h2>',
+                    '<p>Submitting an enquiry does not create a binding contract. Any services will be governed by a written agreement (for example, a statement of work or master services agreement).</p>',
+                    '<h2>Intellectual property</h2>',
+                    '<p>Website content and branding are owned by Verlox UK or its licensors. You may not copy or redistribute content without permission.</p>',
+                    '<h2>Disclaimer</h2>',
+                    '<p>Content is provided for general information and may change. We do not guarantee completeness or suitability for your purposes.</p>',
+                    '<h2>Limitation of liability</h2>',
+                    '<p>To the maximum extent permitted by law, we are not liable for indirect or consequential losses arising from use of the website.</p>',
+                ]),
+            ],
+            [
+                'category' => 'cookies',
+                'title' => 'Cookie Policy',
+                'body_html' => implode("\n", [
+                    '<h1>Cookie Policy</h1>',
+                    '<p><strong>Effective date:</strong> '.$effective.'</p>',
+                    '<p>Cookies are small text files stored on your device. We use cookies that are necessary for site functionality and security, and may use analytics cookies to understand usage.</p>',
+                    '<h2>Essential cookies</h2>',
+                    '<ul><li>Session and security cookies (for example, CSRF protection)</li></ul>',
+                    '<h2>Managing cookies</h2>',
+                    '<p>You can control cookies using your browser settings. Disabling essential cookies may prevent parts of the site from working.</p>',
+                ]),
+            ],
+            [
+                'category' => 'aup',
+                'title' => 'Acceptable Use Policy',
+                'body_html' => implode("\n", [
+                    '<h1>Acceptable Use Policy</h1>',
+                    '<p><strong>Effective date:</strong> '.$effective.'</p>',
+                    '<p>This policy sets out rules for using our website and any client portals or systems we provide.</p>',
+                    '<h2>Prohibited behaviour</h2>',
+                    '<ul>',
+                    '<li>Attempting unauthorised access to systems or accounts</li>',
+                    '<li>Uploading malware or abusive traffic</li>',
+                    '<li>Using forms to send spam or fraudulent messages</li>',
+                    '</ul>',
+                    '<h2>Security</h2>',
+                    '<p>We may block traffic or suspend access where we believe there is misuse or risk to systems.</p>',
+                ]),
+            ],
+            [
+                'category' => 'refunds',
+                'title' => 'Refund and Cancellation Policy',
+                'body_html' => implode("\n", [
+                    '<h1>Refund and Cancellation Policy</h1>',
+                    '<p><strong>Effective date:</strong> '.$effective.'</p>',
+                    '<p>This policy describes refunds and cancellations for Verlox UK services.</p>',
+                    '<h2>Project work</h2>',
+                    '<p>For fixed-scope projects, payment terms will be specified in the agreed quotation/statement of work. Work started or milestones delivered are typically non-refundable.</p>',
+                    '<h2>Retainers</h2>',
+                    '<p>For monthly retainers, you may cancel with notice as stated in your agreement. Unused time may expire at the end of the billing period unless otherwise agreed in writing.</p>',
+                    '<h2>Billing errors</h2>',
+                    '<p>If there is a billing error, contact <a href="mailto:hello@verlox.uk">hello@verlox.uk</a> within 14 days.</p>',
+                ]),
+            ],
+        ];
+
+        foreach ($docs as $doc) {
+            $slug = Str::slug($doc['title']);
+            LegalDocument::query()->updateOrCreate(
+                ['slug' => $slug],
+                $doc + ['slug' => $slug, 'status' => 'published', 'effective_at' => $effective]
+            );
         }
     }
 }

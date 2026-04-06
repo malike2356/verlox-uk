@@ -7,6 +7,7 @@
     @php
         $zohoConfigured = app(\App\Services\ZohoBooksClient::class)->isConfigured();
         $invLogo = \App\Models\CompanySetting::current()->invoiceLogoPublicUrl();
+        $legalDocs = \App\Models\LegalDocument::query()->where('status', 'published')->orderBy('category')->orderBy('title')->get();
     @endphp
     @if($invLogo)
         <div class="mb-4 flex justify-end">
@@ -99,4 +100,21 @@
             </form>
         @endif
     </div>
+
+    @if($legalDocs->isNotEmpty())
+        <div class="mt-6 rounded-2xl border border-gray-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/30 p-4 text-sm">
+            <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Legal documents</h3>
+            <p class="mt-1 text-xs text-gray-600 dark:text-slate-400">Share these links with clients when needed. Policies are published from the MIS.</p>
+            <ul class="mt-3 grid gap-2 sm:grid-cols-2">
+                @foreach($legalDocs as $d)
+                    <li class="min-w-0">
+                        <a class="text-verlox-accent text-verlox-accent-hover underline underline-offset-2"
+                           href="{{ route('legal.show', $d->slug) }}"
+                           target="_blank" rel="noreferrer">{{ $d->title }}</a>
+                        <span class="ml-2 text-[10px] uppercase tracking-wide text-gray-500 dark:text-slate-500">{{ $d->category }}</span>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 @endsection

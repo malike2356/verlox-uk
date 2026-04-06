@@ -9,9 +9,12 @@
         @foreach ($documents as $d)
             <li class="flex justify-between rounded-xl border border-gray-200 dark:border-slate-800 px-3 py-2">
                 <span>{{ $d->title }} @if($d->client)<span class="text-gray-500 dark:text-slate-500">({{ $d->client->contact_name }})</span>@endif</span>
-                <form method="post" action="{{ route('mis.documents.destroy', $d) }}">@csrf @method('delete')
-                    <button type="submit" class="text-red-400 text-xs">Delete</button>
-                </form>
+                <span class="flex items-center gap-3">
+                    <a href="{{ route('mis.documents.download', $d) }}" class="text-verlox-accent text-xs">Download</a>
+                    <form method="post" action="{{ route('mis.documents.destroy', $d) }}">@csrf @method('delete')
+                        <button type="submit" class="text-red-400 text-xs">Delete</button>
+                    </form>
+                </span>
             </li>
         @endforeach
     </ul>

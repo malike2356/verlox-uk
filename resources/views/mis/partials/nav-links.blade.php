@@ -127,6 +127,7 @@
                     ['mis.offerings.index', 'Offerings', 'fa-box-open'],
                     ['mis.pricing-plans.index', 'Pricing plans', 'fa-tags'],
                     ['mis.content-blocks.index', 'Site content', 'fa-pen-to-square'],
+                    ['mis.legal-documents.index', 'Legal documents', 'fa-scale-balanced'],
                 ],
             ];
             $groups['Users & system'] = [

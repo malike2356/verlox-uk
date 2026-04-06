@@ -20,6 +20,7 @@ use App\Http\Controllers\Mis\FinanceDashboardController;
 use App\Http\Controllers\Mis\GoogleCalendarController;
 use App\Http\Controllers\Mis\HelpController;
 use App\Http\Controllers\Mis\InvoiceController as MisInvoiceController;
+use App\Http\Controllers\Mis\LegalDocumentController as MisLegalDocumentController;
 use App\Http\Controllers\Mis\LeadActivityController;
 use App\Http\Controllers\Mis\LeadController as MisLeadController;
 use App\Http\Controllers\Mis\LeadConvertController;
@@ -41,6 +42,7 @@ use App\Http\Controllers\Mis\Va\EngagementController as VaEngagementController;
 use App\Http\Controllers\Mis\Va\TimeLogController as VaTimeLogController;
 use App\Http\Controllers\Mis\ZohoController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicLegalController;
 use App\Http\Controllers\PublicBookingController;
 use App\Http\Controllers\PublicContentBlockController;
 use App\Http\Controllers\StripeWebhookController;
@@ -50,6 +52,7 @@ Route::get('/', HomeController::class)->name('marketing.home');
 Route::get('/virtual-assistant', VirtualAssistantController::class)->name('marketing.virtual-assistant');
 Route::get('/book', BookController::class)->name('marketing.book');
 Route::post('/leads', [LeadCaptureController::class, 'store'])->name('leads.store');
+Route::get('/legal/{slug}', [PublicLegalController::class, 'show'])->name('legal.show');
 
 Route::get('/checkout/offering/{offering}', [CheckoutController::class, 'show'])->name('checkout.show');
 Route::post('/checkout/offering/{offering}', [CheckoutController::class, 'start'])->name('checkout.start');
@@ -127,6 +130,15 @@ Route::middleware(['auth', 'verified', 'mis.access'])->prefix('mis')->name('mis.
         Route::get('/contract-templates/{contractTemplate}/edit', [ContractTemplateController::class, 'edit'])->name('contract-templates.edit');
         Route::patch('/contract-templates/{contractTemplate}', [ContractTemplateController::class, 'update'])->name('contract-templates.update');
         Route::delete('/contract-templates/{contractTemplate}', [ContractTemplateController::class, 'destroy'])->name('contract-templates.destroy');
+
+        Route::get('/legal-documents', [MisLegalDocumentController::class, 'index'])->name('legal-documents.index');
+        Route::get('/legal-documents/create', [MisLegalDocumentController::class, 'create'])->name('legal-documents.create');
+        Route::post('/legal-documents', [MisLegalDocumentController::class, 'store'])->name('legal-documents.store');
+        Route::get('/legal-documents/{legalDocument}/edit', [MisLegalDocumentController::class, 'edit'])->name('legal-documents.edit');
+        Route::patch('/legal-documents/{legalDocument}', [MisLegalDocumentController::class, 'update'])->name('legal-documents.update');
+        Route::delete('/legal-documents/{legalDocument}', [MisLegalDocumentController::class, 'destroy'])->name('legal-documents.destroy');
+        Route::get('/legal-documents/{legalDocument}/download', [MisLegalDocumentController::class, 'downloadHtml'])->name('legal-documents.download');
+        Route::post('/legal-documents/{legalDocument}/create-document', [MisLegalDocumentController::class, 'createDocumentRecord'])->name('legal-documents.create-document');
 
         Route::get('/event-types', [EventTypeController::class, 'index'])->name('event-types.index');
         Route::post('/event-types', [EventTypeController::class, 'store'])->name('event-types.store');
@@ -259,6 +271,7 @@ Route::middleware(['auth', 'verified', 'mis.access'])->prefix('mis')->name('mis.
     Route::get('/documents', [MisDocumentController::class, 'index'])->name('documents.index');
     Route::get('/documents/create', [MisDocumentController::class, 'create'])->name('documents.create');
     Route::post('/documents', [MisDocumentController::class, 'store'])->name('documents.store');
+    Route::get('/documents/{document}/download', [MisDocumentController::class, 'download'])->name('documents.download');
     Route::delete('/documents/{document}', [MisDocumentController::class, 'destroy'])->name('documents.destroy');
 
     Route::get('/pipeline', [PipelineBoardController::class, 'index'])->name('pipeline.index');

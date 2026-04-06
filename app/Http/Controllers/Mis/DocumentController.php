@@ -8,7 +8,9 @@ use App\Models\Document;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class DocumentController extends Controller
 {
@@ -57,5 +59,17 @@ class DocumentController extends Controller
         $document->delete();
 
         return redirect()->route('mis.documents.index')->with('status', 'Document removed.');
+    }
+
+    public function download(Document $document): Response
+    {
+        abort_unless(Storage::disk('local')->exists($document->file_path), 404);
+
+        $filename = Str::slug($document->title).($document->mime === 'text/html' ? '.html' : '');
+
+        return response(Storage::disk('local')->get($document->file_path), 200, [
+            'Content-Type' => $document->mime ?: 'application/octet-stream',
+            'Content-Disposition' => 'attachment; filename="'.$filename.'"',
+        ]);
     }
 }
