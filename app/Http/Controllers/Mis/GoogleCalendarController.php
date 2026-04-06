@@ -24,8 +24,15 @@ class GoogleCalendarController extends Controller
                 ->with('error', 'Google Calendar access denied.');
         }
 
-        $redirectUri = route('mis.google-calendar.callback');
-        $google->exchangeCode($request->input('code'), $redirectUri);
+        try {
+            $redirectUri = route('mis.google-calendar.callback');
+            $google->exchangeCode($request->input('code'), $redirectUri);
+        } catch (\Throwable $e) {
+            logger()->error('Google Calendar OAuth failed', ['error' => $e->getMessage()]);
+
+            return redirect()->route('mis.settings.edit')
+                ->with('error', 'Google Calendar connection failed: '.$e->getMessage());
+        }
 
         return redirect()->route('mis.settings.edit')
             ->with('status', 'Google Calendar connected.');
