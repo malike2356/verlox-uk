@@ -1,0 +1,356 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    [x-cloak] {
+        display: none !important;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        @apply transition-colors duration-200;
+    }
+    /* Dark theme: autofill for slate inputs (e.g. email on navy card) */
+    .dark input:-webkit-autofill,
+    .dark input:-webkit-autofill:hover,
+    .dark input:-webkit-autofill:focus {
+        -webkit-text-fill-color: #f8fafc !important;
+        box-shadow: inset 0 0 0 1000px #475569 !important;
+        transition: background-color 99999s ease-out 0s;
+    }
+    /* Password well: keep light text on dark surface (do not force white fill on every keystroke). */
+    .dark .password-field-well input.password-field-well-input:-webkit-autofill,
+    .dark .password-field-well input.password-field-well-input:-webkit-autofill:hover,
+    .dark .password-field-well input.password-field-well-input:-webkit-autofill:focus {
+        color: #f8fafc !important;
+        -webkit-text-fill-color: #f8fafc !important;
+        box-shadow: inset 0 0 0 1000px rgb(30 41 59) !important;
+    }
+
+    /*
+     * Dark MIS: native date/time - @tailwindcss/forms forces background #fff; Chrome also paints
+     * time/date internals light unless color-scheme is dark.
+     */
+    .dark input[type='date'],
+    .dark input[type='time'],
+    .dark input[type='datetime-local'],
+    .dark input[type='month'],
+    .dark input[type='week'] {
+        color-scheme: dark;
+        background-color: rgb(30 41 59) !important; /* slate-800 */
+        color: #f1f5f9 !important;
+        border-color: rgb(71 85 105) !important; /* slate-600 */
+    }
+
+    .dark input[type='date']::-webkit-datetime-edit,
+    .dark input[type='date']::-webkit-datetime-edit-fields-wrapper,
+    .dark input[type='date']::-webkit-datetime-edit-text,
+    .dark input[type='date']::-webkit-datetime-edit-month-field,
+    .dark input[type='date']::-webkit-datetime-edit-day-field,
+    .dark input[type='date']::-webkit-datetime-edit-year-field,
+    .dark input[type='datetime-local']::-webkit-datetime-edit,
+    .dark input[type='datetime-local']::-webkit-datetime-edit-fields-wrapper,
+    .dark input[type='time']::-webkit-datetime-edit,
+    .dark input[type='time']::-webkit-datetime-edit-fields-wrapper,
+    .dark input[type='time']::-webkit-datetime-edit-hour-field,
+    .dark input[type='time']::-webkit-datetime-edit-minute-field,
+    .dark input[type='time']::-webkit-datetime-edit-second-field,
+    .dark input[type='time']::-webkit-datetime-edit-millisecond-field,
+    .dark input[type='time']::-webkit-datetime-edit-ampm-field,
+    .dark input[type='time']::-webkit-datetime-edit-text {
+        color: #f1f5f9;
+    }
+
+    .dark input[type='date']::-webkit-calendar-picker-indicator,
+    .dark input[type='datetime-local']::-webkit-calendar-picker-indicator {
+        filter: invert(0.9);
+        opacity: 0.85;
+    }
+
+    .dark select option {
+        background-color: #020617;
+        color: #f1f5f9;
+    }
+}
+
+@layer components {
+    .theme-toggle {
+        @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium cursor-pointer transition-colors;
+        border-color: rgba(15, 23, 42, 0.13);
+        background-color: #ffffff;
+        color: #0b1020;
+    }
+    .dark .theme-toggle {
+        border-color: rgba(201, 168, 76, 0.26);
+        background-color: #0f223c;
+        color: #e5e7eb;
+    }
+    .theme-toggle:hover {
+        border-color: #6366f1;
+    }
+    .dark .theme-toggle:hover {
+        border-color: #c9a84c;
+    }
+    .theme-toggle__icon {
+        @apply w-2.5 h-2.5 rounded-full shrink-0;
+        background: conic-gradient(from 180deg, #facc15, #fb923c, #f97316, #facc15);
+    }
+}
+
+@layer utilities {
+    .text-verlox-accent {
+        @apply text-indigo-600 dark:text-[#C9A84C];
+    }
+    .text-verlox-accent-hover {
+        @apply hover:text-indigo-700 dark:hover:text-[#E7D59C];
+    }
+    .bg-verlox-accent {
+        @apply bg-indigo-600 dark:bg-[#C9A84C];
+    }
+    .text-on-verlox-accent {
+        @apply text-white dark:text-[#0B1829];
+    }
+    .border-verlox {
+        @apply border-gray-200 dark:border-slate-800;
+    }
+    .bg-verlox-page {
+        @apply bg-[#f4f5fb] dark:bg-[#0B1829];
+    }
+    .bg-verlox-elevated {
+        @apply bg-white/95 dark:bg-[#0F223C]/95;
+    }
+
+    /* ── MIS shell: sidebar + content (top bar = Propreneur-style .top-bar in mis-topbar-propreneur.css) ── */
+    .mis-shell-sidebar {
+        position: fixed;
+        top: 3rem;
+        left: 0;
+        z-index: 1000;
+        width: 16rem;
+        height: calc(100vh - 3rem);
+        overflow-x: hidden;
+        overflow-y: auto;
+        background: #2c3e50;
+        transform: translateZ(0);
+        -webkit-overflow-scrolling: touch;
+        border-right: 1px solid rgba(0, 0, 0, 0.12);
+    }
+    .mis-shell-sidebar::-webkit-scrollbar {
+        width: 6px;
+    }
+    .mis-shell-sidebar::-webkit-scrollbar-track {
+        background: #1a252f;
+    }
+    .mis-shell-sidebar::-webkit-scrollbar-thumb {
+        background: #34495e;
+        border-radius: 3px;
+    }
+    .mis-shell-sidebar::-webkit-scrollbar-thumb:hover {
+        background: #4a5f7a;
+    }
+
+    @media (max-width: 767px) {
+        .mis-shell-sidebar {
+            transform: translateX(-100%) translateZ(0);
+            transition: transform 0.3s ease;
+        }
+        .mis-shell-sidebar.mis-shell-sidebar--open {
+            transform: translateX(0) translateZ(0);
+        }
+    }
+
+    .mis-shell-main {
+        @apply min-h-screen flex flex-col pt-12 md:pl-64;
+    }
+
+    .mis-shell-menu-wrap {
+        @apply p-3 pb-8 text-sm;
+    }
+
+    .mis-sidebar-section {
+        margin-top: 0.5rem;
+        padding: 0.35rem 0.5rem 0.4rem 0.75rem;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.04);
+        transition: background 0.2s ease;
+    }
+    .mis-sidebar-section:first-child {
+        margin-top: 0;
+    }
+    .mis-sidebar-section + .mis-sidebar-section {
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding-top: 0.5rem;
+        margin-top: 0.5rem;
+    }
+    .mis-sidebar-section:hover {
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .mis-menu-link {
+        @apply flex items-center gap-2 rounded px-3 py-2 no-underline transition-all;
+        color: #ecf0f1;
+        margin-bottom: 0.125rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .mis-menu-link:last-child {
+        margin-bottom: 0;
+    }
+    .mis-menu-link i {
+        @apply w-5 shrink-0 text-center text-[0.85em] opacity-90;
+    }
+    .mis-menu-link:hover {
+        background: #34495e;
+        color: #fff;
+        transform: translateX(3px);
+    }
+    .mis-menu-link.is-active {
+        background: #c9a84c;
+        color: #0b1829;
+        font-weight: 600;
+    }
+    .mis-menu-link.is-active i {
+        opacity: 1;
+    }
+
+    .mis-menu-link--sub {
+        @apply text-[0.9em] pl-4;
+    }
+
+    .mis-sidebar-details > summary {
+        list-style: none;
+        cursor: pointer;
+        user-select: none;
+        @apply flex w-full items-center justify-between gap-2 rounded px-2 py-2 text-left text-sm font-medium;
+        color: #ecf0f1;
+        margin-bottom: 0.125rem;
+    }
+    .mis-sidebar-details > summary::-webkit-details-marker {
+        display: none;
+    }
+    .mis-sidebar-details > summary::marker {
+        content: '';
+    }
+    .mis-sidebar-details .mis-menu-chevron {
+        @apply text-[0.65rem] opacity-70 transition-transform duration-300;
+    }
+    .mis-sidebar-details[open] .mis-menu-chevron {
+        transform: rotate(180deg);
+    }
+
+    .mis-sub-menu {
+        @apply overflow-hidden rounded;
+        background: rgba(0, 0, 0, 0.12);
+        margin-top: 0.125rem;
+    }
+    .mis-sub-menu .mis-menu-link {
+        padding-left: 0.5rem;
+    }
+    .mis-sub-menu .mis-menu-link:hover {
+        transform: translateX(5px);
+    }
+
+    .mis-sidebar-footer {
+        @apply border-t p-3 text-xs;
+        border-color: rgba(255, 255, 255, 0.08);
+        color: #94a3b8;
+    }
+    .mis-sidebar-footer button {
+        @apply text-slate-300 hover:text-white bg-transparent border-0 cursor-pointer p-0 underline-offset-2 hover:underline;
+    }
+
+    .mis-mobile-overlay {
+        @apply fixed inset-0 z-[999] bg-black/50 md:hidden;
+    }
+    .mis-mobile-overlay[hidden] {
+        display: none;
+    }
+
+    .mis-sidebar-section--footer-links {
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    /**
+     * Help TOC (and similar): never use Tailwind `bg-white` on MIS - Bootstrap bundles
+     * `.bg-white { … !important }` in mis-overrides.css and breaks dark: backgrounds.
+     */
+    .mis-help-toc {
+        @apply rounded-lg border p-4;
+        border-color: rgb(229 231 235);
+        background-color: rgb(249 250 251);
+    }
+    .dark .mis-help-toc {
+        border-color: rgb(71 85 105);
+        background-color: rgb(15 23 42);
+    }
+    .mis-help-toc .mis-help-toc__title {
+        @apply mb-2 text-xs font-medium uppercase tracking-wide;
+        color: rgb(107 114 128);
+    }
+    .dark .mis-help-toc .mis-help-toc__title {
+        color: rgb(148 163 184);
+    }
+    .mis-help-toc a {
+        @apply underline underline-offset-2;
+        color: rgb(79 70 229);
+    }
+    .mis-help-toc a:hover {
+        color: rgb(67 56 202);
+    }
+    .dark .mis-help-toc a {
+        color: rgb(253 230 138);
+    }
+    .dark .mis-help-toc a:hover {
+        color: rgb(254 243 199);
+    }
+}
+
+/*
+ * MIS main: file inputs - Tailwind `file:*` targets ::file-selector-button in this bundle.
+ * Keep here (not mis-overrides) so Lightning+Bootstrap minify does not drop base pseudo rules.
+ */
+html.dark .mis-shell-main main.mis-main input[type='file'],
+html[data-theme='dark'] .mis-shell-main main.mis-main input[type='file'] {
+    padding: 0.35rem 0.5rem !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-radius: 0.5rem !important;
+}
+
+html.dark .mis-shell-main main.mis-main input[type='file']::file-selector-button,
+html[data-theme='dark'] .mis-shell-main main.mis-main input[type='file']::file-selector-button {
+    margin-right: 0.75rem;
+    cursor: pointer;
+    border-radius: 0.375rem;
+    border: 1px solid rgb(100 116 139) !important;
+    background-color: rgb(51 65 85) !important;
+    color: #f1f5f9 !important;
+    padding: 0.4rem 0.85rem !important;
+    font-size: 0.8125rem;
+    font-weight: 500;
+}
+
+html.dark .mis-shell-main main.mis-main input[type='file']::-webkit-file-upload-button,
+html[data-theme='dark'] .mis-shell-main main.mis-main input[type='file']::-webkit-file-upload-button {
+    margin-right: 0.75rem;
+    cursor: pointer;
+    border-radius: 0.375rem;
+    border: 1px solid rgb(100 116 139) !important;
+    background-color: rgb(51 65 85) !important;
+    color: #f1f5f9 !important;
+    padding: 0.4rem 0.85rem !important;
+    font-size: 0.8125rem;
+    font-weight: 500;
+}
+
+html.dark .mis-shell-main main.mis-main input[type='file']::file-selector-button:hover,
+html[data-theme='dark'] .mis-shell-main main.mis-main input[type='file']::file-selector-button:hover {
+    background-color: rgb(71 85 105) !important;
+}
+
+html.dark .mis-shell-main main.mis-main input[type='file']::-webkit-file-upload-button:hover,
+html[data-theme='dark'] .mis-shell-main main.mis-main input[type='file']::-webkit-file-upload-button:hover {
+    background-color: rgb(71 85 105) !important;
+}

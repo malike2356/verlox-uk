@@ -1,0 +1,365 @@
+// ============================================================
+// NOVALANT VA DIVISION — MIS DATABASE SCHEMA
+// Prisma ORM Schema for PostgreSQL
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// ENUMS
+// ============================================================
+
+enum Tier {
+  STARTER       // 20 hrs/month
+  GROWTH        // 40 hrs/month
+  PROFESSIONAL  // 80 hrs/month
+  ENTERPRISE    // 160 hrs/month
+  ADHOC         // pay-as-you-go
+}
+
+enum ClientStatus {
+  PROSPECT
+  ONBOARDING
+  ACTIVE
+  PAUSED
+  CHURNED
+}
+
+enum VAStatus {
+  AVAILABLE
+  ASSIGNED
+  UNAVAILABLE
+  INACTIVE
+}
+
+enum ContractStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  ENDED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  PAID
+  FAILED
+}
+
+enum DocumentType {
+  CONTRACT
+  NDA
+  DPA
+  INVOICE
+  ONBOARDING_FORM
+  REFERENCE
+  OTHER
+}
+
+enum UserRole {
+  ADMIN
+  CLIENT
+  VA
+}
+
+// ============================================================
+// USERS (Authentication)
+// ============================================================
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  role          UserRole
+  passwordHash  String
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Linked to client or VA profile
+  clientId      String?
+  vaId          String?
+
+  sessions      Session[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@map("sessions")
+}
+
+// ============================================================
+// CLIENTS
+// ============================================================
+
+model Client {
+  id              String        @id @default(uuid())
+  companyName     String
+  contactName     String
+  email           String        @unique
+  phone           String?
+  address         String?
+  website         String?
+  tier            Tier
+  status          ClientStatus  @default(ONBOARDING)
+  monthlyRate     Decimal       @db.Decimal(10, 2)  // GBP — client billing rate
+  hoursIncluded   Int                                // contracted hours/month
+  overageRate     Decimal       @db.Decimal(10, 2)  // GBP per overage hour
+  contractStart   DateTime
+  contractEnd     DateTime?                          // null = rolling
+  minimumTermEnd  DateTime                           // contractStart + 3 months
+  stripeCustomerId String?      @unique
+  accountManager  String?       // Novalant staff member name
+  notes           String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  contracts       Contract[]
+  invoices        Invoice[]
+  npsResponses    NpsResponse[]
+  documents       Document[]
+  commLogs        CommunicationLog[]
+
+  @@map("clients")
+}
+
+// ============================================================
+// VIRTUAL ASSISTANTS
+// ============================================================
+
+model VirtualAssistant {
+  id              String    @id @default(uuid())
+  fullName        String
+  email           String    @unique
+  country         String
+  timezone        String    // e.g. "Asia/Manila", "Africa/Johannesburg"
+  hourlyRateGBP   Decimal   @db.Decimal(10, 2)
+  skills          String[]  // e.g. ["admin", "social-media", "bookkeeping"]
+  availability    VAStatus  @default(AVAILABLE)
+  performScore    Float?    // 1.0 to 5.0 — updated monthly
+  wiseEmail       String?   // Wise payment email
+  paymentCurrency String    @default("GBP")
+  phone           String?
+  notes           String?
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  contracts       Contract[]
+  timeLogs        TimeLog[]
+  payments        VAPayment[]
+  documents       Document[]
+  commLogs        CommunicationLog[]
+
+  @@map("virtual_assistants")
+}
+
+// ============================================================
+// CONTRACTS (links Client <-> VA)
+// ============================================================
+
+model Contract {
+  id              String          @id @default(uuid())
+  clientId        String
+  client          Client          @relation(fields: [clientId], references: [id])
+  vaId            String
+  va              VirtualAssistant @relation(fields: [vaId], references: [id])
+  tier            Tier
+  hoursPerMonth   Int
+  clientRateGBP   Decimal         @db.Decimal(10, 2)  // monthly client billing amount
+  vaRateGBP       Decimal         @db.Decimal(10, 2)  // hourly VA cost
+  startDate       DateTime
+  endDate         DateTime?
+  status          ContractStatus  @default(DRAFT)
+  notes           String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  // Computed fields (can be calculated in queries):
+  // grossProfit = clientRateGBP - (vaRateGBP * hoursPerMonth)
+  // marginPct   = grossProfit / clientRateGBP * 100
+
+  timeLogs        TimeLog[]
+  marginLedger    MarginLedger[]
+
+  @@map("contracts")
+}
+
+// ============================================================
+// TIME LOGS
+// ============================================================
+
+model TimeLog {
+  id              String    @id @default(uuid())
+  contractId      String
+  contract        Contract  @relation(fields: [contractId], references: [id])
+  vaId            String
+  va              VirtualAssistant @relation(fields: [vaId], references: [id])
+  clientId        String    // denormalized for easy querying
+  date            DateTime  @db.Date
+  hoursLogged     Decimal   @db.Decimal(5, 2)
+  taskDescription String
+  isApproved      Boolean   @default(false)
+  approvedBy      String?
+  approvedAt      DateTime?
+  createdAt       DateTime  @default(now())
+
+  @@map("time_logs")
+}
+
+// ============================================================
+// INVOICES (Client billing)
+// ============================================================
+
+model Invoice {
+  id              String        @id @default(uuid())
+  clientId        String
+  client          Client        @relation(fields: [clientId], references: [id])
+  periodMonth     Int           // 1-12
+  periodYear      Int
+  hoursContracted Int
+  hoursLogged     Decimal       @db.Decimal(8, 2)
+  overageHours    Decimal       @db.Decimal(8, 2)  @default(0)
+  retainerAmount  Decimal       @db.Decimal(10, 2)
+  overageAmount   Decimal       @db.Decimal(10, 2)  @default(0)
+  totalAmount     Decimal       @db.Decimal(10, 2)  // retainer + overage
+  vatAmount       Decimal       @db.Decimal(10, 2)  @default(0)
+  status          InvoiceStatus @default(DRAFT)
+  stripeInvoiceId String?       @unique
+  sentAt          DateTime?
+  dueDate         DateTime?
+  paidAt          DateTime?
+  notes           String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@unique([clientId, periodMonth, periodYear])
+  @@map("invoices")
+}
+
+// ============================================================
+// VA PAYMENTS (Contractor payroll)
+// ============================================================
+
+model VAPayment {
+  id              String        @id @default(uuid())
+  vaId            String
+  va              VirtualAssistant @relation(fields: [vaId], references: [id])
+  periodMonth     Int
+  periodYear      Int
+  hoursWorked     Decimal       @db.Decimal(8, 2)
+  rateGBP         Decimal       @db.Decimal(10, 2)
+  totalAmountGBP  Decimal       @db.Decimal(10, 2)
+  currency        String        @default("GBP")
+  status          PaymentStatus @default(PENDING)
+  wiseTransferId  String?
+  paidAt          DateTime?
+  invoiceRef      String?       // VA's invoice reference number
+  notes           String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@unique([vaId, periodMonth, periodYear])
+  @@map("va_payments")
+}
+
+// ============================================================
+// MARGIN LEDGER (monthly P&L per contract)
+// ============================================================
+
+model MarginLedger {
+  id              String    @id @default(uuid())
+  contractId      String
+  contract        Contract  @relation(fields: [contractId], references: [id])
+  periodMonth     Int
+  periodYear      Int
+  revenue         Decimal   @db.Decimal(10, 2)  // amount billed to client
+  vaCost          Decimal   @db.Decimal(10, 2)  // amount paid to VA
+  grossProfit     Decimal   @db.Decimal(10, 2)  // revenue - vaCost
+  marginPct       Decimal   @db.Decimal(5, 2)   // grossProfit / revenue * 100
+  createdAt       DateTime  @default(now())
+
+  @@unique([contractId, periodMonth, periodYear])
+  @@map("margin_ledger")
+}
+
+// ============================================================
+// DOCUMENTS
+// ============================================================
+
+model Document {
+  id              String       @id @default(uuid())
+  relatedType     String       // "client" | "va"
+  clientId        String?
+  client          Client?      @relation(fields: [clientId], references: [id])
+  vaId            String?
+  va              VirtualAssistant? @relation(fields: [vaId], references: [id])
+  docType         DocumentType
+  fileName        String
+  fileUrl         String       // S3 URL
+  fileSizeBytes   Int?
+  signedAt        DateTime?
+  uploadedBy      String       // user ID or name
+  notes           String?
+  createdAt       DateTime     @default(now())
+
+  @@map("documents")
+}
+
+// ============================================================
+// NPS RESPONSES
+// ============================================================
+
+model NpsResponse {
+  id              String    @id @default(uuid())
+  clientId        String
+  client          Client    @relation(fields: [clientId], references: [id])
+  score           Int       // 0-10
+  comment         String?
+  submittedAt     DateTime  @default(now())
+  periodMonth     Int
+  periodYear      Int
+
+  @@map("nps_responses")
+}
+
+// ============================================================
+// COMMUNICATION LOG
+// ============================================================
+
+model CommunicationLog {
+  id              String    @id @default(uuid())
+  relatedType     String    // "client" | "va"
+  clientId        String?
+  client          Client?   @relation(fields: [clientId], references: [id])
+  vaId            String?
+  va              VirtualAssistant? @relation(fields: [vaId], references: [id])
+  type            String    // "email" | "call" | "meeting" | "slack" | "note"
+  summary         String
+  details         String?
+  createdBy       String    // staff member name
+  createdAt       DateTime  @default(now())
+
+  @@map("communication_logs")
+}

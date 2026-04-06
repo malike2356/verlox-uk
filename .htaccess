@@ -1,0 +1,4 @@
+RewriteEngine On
+
+# Redirect bare verlox.uk/ folder root to Laravel public (single deploy target)
+RewriteRule ^$ /verlox.uk/mis/public/ [R=302,L]

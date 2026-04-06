@@ -6,7 +6,10 @@
 
 # Deploy scripts (contain or reference secrets)
 deploy_verlox_uk.sh
-scripts/deploy.sh
+
+# Local backups (never commit)
+backup/
+backup/**
 
 # Logs
 *.log

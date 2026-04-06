@@ -1,57 +1,64 @@
 #!/usr/bin/env bash
-#
-# Zero-downtime-ish deploy for verlox.uk static site over SSH using rsync.
-# Requirements:
-# - SSH access to the target host
-# - rsync installed locally and on the server
-# - Environment variables exported or provided inline:
-#     DEPLOY_SSH_HOST   # e.g. server.example.com or an SSH config alias
-#     DEPLOY_SSH_USER   # e.g. deploy
-#     DEPLOY_PATH       # e.g. /home/deploy/apps/verlox.uk/current
-#
-# Usage:
-#   DEPLOY_SSH_HOST=host DEPLOY_SSH_USER=user DEPLOY_PATH=/path ./scripts/deploy.sh
-#
 set -euo pipefail
 
-require() {
-  if [[ -z "${!1:-}" ]]; then
-    echo "Missing required env var: $1" >&2
-    exit 1
-  fi
-}
-
-require DEPLOY_SSH_HOST
-require DEPLOY_SSH_USER
-require DEPLOY_PATH
+# 3-way deploy:
+# 1) Push local branch to origin
+# 2) SSH pull on one or more servers
+#
+# No secrets should be stored in this repo. Use SSH keys and/or env vars.
+#
+# Usage:
+#   scripts/deploy.sh                 # push + pull on default targets
+#   DEPLOY_TARGETS="u@h:/path u@h2:/path2" scripts/deploy.sh
+#   DEPLOY_BRANCH=main scripts/deploy.sh
+#   DEPLOY_REMOTE=origin scripts/deploy.sh
+#
+# Optional remote post-pull commands:
+#   DEPLOY_AFTER_PULL='php artisan migrate --force' scripts/deploy.sh
+#
+# Example targets (shared hosting):
+#   DEPLOY_TARGETS="n15dzk3l@bwehltd.com:~/verlox.uk" scripts/deploy.sh
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SRC_DIR="${ROOT_DIR}"
+DEPLOY_REMOTE="${DEPLOY_REMOTE:-origin}"
+DEPLOY_BRANCH="${DEPLOY_BRANCH:-main}"
+DEPLOY_TARGETS="${DEPLOY_TARGETS:-}"
+DEPLOY_AFTER_PULL="${DEPLOY_AFTER_PULL:-}"
 
-EXCLUDES=(
-  ".git/"
-  ".gitignore"
-  "node_modules/"
-  "vendor/"
-  ".access.config"
-  "*.log"
-  "scripts/"
-)
+cd "$ROOT_DIR"
 
-RSYNC_EXCLUDES=()
-for e in "${EXCLUDES[@]}"; do
-  RSYNC_EXCLUDES+=(--exclude "$e")
+echo "==> Deploy: push ${DEPLOY_BRANCH} to ${DEPLOY_REMOTE}"
+git rev-parse --is-inside-work-tree >/dev/null
+git push "$DEPLOY_REMOTE" "$DEPLOY_BRANCH"
+
+if [[ -z "$DEPLOY_TARGETS" ]]; then
+  echo "==> No DEPLOY_TARGETS set; push complete."
+  exit 0
+fi
+
+echo "==> Deploy: pulling on targets"
+
+for t in $DEPLOY_TARGETS; do
+  host="${t%%:*}"
+  path="${t#*:}"
+
+  if [[ -z "$host" || -z "$path" || "$host" == "$path" ]]; then
+    echo "Invalid target: '$t' (expected user@host:/absolute/or/tilde/path)" >&2
+    exit 2
+  fi
+
+  echo "----> $host:$path"
+  ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new "$host" bash -lc "set -euo pipefail
+    cd \"$path\"
+    git fetch --prune \"$DEPLOY_REMOTE\"
+    git checkout \"$DEPLOY_BRANCH\"
+    git pull --ff-only \"$DEPLOY_REMOTE\" \"$DEPLOY_BRANCH\"
+    if [[ -n \"$DEPLOY_AFTER_PULL\" ]]; then
+      echo \"[after-pull] \$DEPLOY_AFTER_PULL\"
+      eval \"$DEPLOY_AFTER_PULL\"
+    fi
+  "
 done
 
-echo "Deploying to ${DEPLOY_SSH_USER}@${DEPLOY_SSH_HOST}:${DEPLOY_PATH}"
-ssh "${DEPLOY_SSH_USER}@${DEPLOY_SSH_HOST}" "mkdir -p '${DEPLOY_PATH}'"
-
-rsync -az --delete \
-  "${RSYNC_EXCLUDES[@]}" \
-  --checksum \
-  --human-readable \
-  --progress \
-  "${SRC_DIR}/" "${DEPLOY_SSH_USER}@${DEPLOY_SSH_HOST}:${DEPLOY_PATH}/"
-
-echo "Deploy complete."
+echo "==> Deploy complete."
 

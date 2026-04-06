@@ -1,0 +1,369 @@
+/**
+ * Verlox MIS top bar - structure and styles aligned with
+ * Propreneur api/resources/views/layouts/app.blade.php (top-bar block).
+ *
+ * Loaded via mis-overrides.css after Tailwind + Bootstrap so these rules win
+ * over @tailwindcss/forms (e.g. white text inputs).
+ */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 48px;
+    background: #1e293b;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    border-bottom: 1px solid #334155;
+    z-index: 1010;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+.top-bar-start {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+    flex: 0 1 auto;
+}
+@media (min-width: 768px) {
+    .top-bar-start {
+        gap: 0.75rem;
+    }
+}
+.top-bar-actions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    min-width: 0;
+}
+.top-bar-ml-1 {
+    margin-inline-start: 0.25rem;
+}
+.top-bar-quick-wrap--md {
+    display: none;
+    align-items: center;
+    gap: 0.25rem;
+    min-width: 0;
+}
+@media (min-width: 768px) {
+    .top-bar-quick-wrap--md {
+        display: flex;
+    }
+}
+.top-bar-show-sm {
+    display: none;
+}
+@media (min-width: 576px) {
+    .top-bar-show-sm {
+        display: inline;
+    }
+}
+.top-bar-show-sm-flex {
+    display: none;
+    align-items: center;
+}
+@media (min-width: 576px) {
+    .top-bar-show-sm-flex {
+        display: inline-flex;
+    }
+}
+.top-bar a,
+.top-bar .top-bar-link {
+    color: #e2e8f0;
+    text-decoration: none;
+    font-size: 0.875rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: 4px;
+    transition:
+        color 0.15s,
+        background 0.15s;
+}
+.top-bar a:hover,
+.top-bar .top-bar-link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+}
+.top-bar-brand {
+    font-weight: 600;
+    color: #fff !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.top-bar-brand img {
+    height: 32px;
+    width: 32px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+.top-bar-brand-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+}
+.top-bar-quicklinks {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+.top-bar .quick-links-toggle {
+    color: #e2e8f0;
+    font-size: 0.875rem;
+    padding: 0.35rem 0.55rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    white-space: nowrap;
+}
+.top-bar .quick-links-toggle:hover,
+.top-bar .quick-links-toggle:focus-visible {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+.top-bar .quick-links-toggle::after {
+    margin-left: 0.15rem;
+}
+.top-bar-quick-menu {
+    min-width: 15.5rem;
+    max-height: min(70vh, 28rem);
+    overflow-y: auto;
+    font-size: 0.8125rem;
+    background: #0f172a;
+    border: 1px solid #334155;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.top-bar-quick-menu .dropdown-header {
+    color: #94a3b8 !important;
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+}
+.top-bar-quick-menu .dropdown-item {
+    color: #e2e8f0;
+    padding: 0.4rem 1rem;
+}
+.top-bar-quick-menu .dropdown-item:hover,
+.top-bar-quick-menu .dropdown-item:focus {
+    background: #1e293b;
+    color: #fff;
+}
+.top-bar-quick-menu .dropdown-item i {
+    width: 1.15rem;
+    margin-right: 0.5rem;
+    color: #94a3b8;
+}
+.top-bar-quick-menu .dropdown-item:hover i,
+.top-bar-quick-menu .dropdown-item:focus i {
+    color: #cbd5e1;
+}
+.top-bar-quick-menu .dropdown-divider {
+    border-color: #334155;
+}
+.top-bar-user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.top-bar-user .dropdown-toggle {
+    color: #e2e8f0;
+    text-decoration: none;
+    font-size: 0.875rem;
+    padding: 0.28rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+.top-bar-user .dropdown-toggle:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.32);
+}
+.top-bar-user .dropdown-header {
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+}
+.top-bar-user-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.top-bar-user .dropdown-menu {
+    font-size: 0.875rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.top-bar-user .dropdown-item {
+    color: #1e293b;
+    padding: 0.5rem 1rem;
+}
+.top-bar-user .dropdown-item:hover {
+    background-color: #f8fafc;
+    color: #0f172a;
+}
+.top-bar-user .dropdown-item i {
+    width: 1.25rem;
+    margin-right: 0.5rem;
+    color: #475569;
+}
+.top-bar-user .dropdown-item:hover i {
+    color: #334155;
+}
+.top-bar-user .dropdown-divider {
+    margin: 0.25rem 0;
+    border-color: #e5e7eb;
+}
+.top-bar-center {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0.5rem;
+    min-width: 0;
+    max-width: none;
+}
+@media (min-width: 1200px) {
+    .top-bar-center {
+        max-width: 52%;
+    }
+}
+@media (max-width: 768px) {
+    .top-bar-center {
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 0 0.2rem;
+    }
+    .top-bar-brand-name {
+        max-width: 90px;
+    }
+}
+/* Beat @tailwindcss/forms (input[type=text] background #fff) - keep dark bar search pill */
+.top-bar .top-bar-search-input[type='text'],
+.top-bar .top-bar-search-input#smartSearchTrigger {
+    width: 100%;
+    max-width: 420px;
+    height: 32px;
+    padding: 0 0.75rem 0 2rem;
+    font-size: 0.8125rem;
+    color: #e2e8f0 !important;
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 6px;
+    outline: none;
+    cursor: text;
+    box-shadow: none !important;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.top-bar .top-bar-search-input::placeholder {
+    color: #94a3b8;
+    opacity: 1;
+}
+.top-bar .top-bar-search-input:hover {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+.top-bar .top-bar-search-input:focus {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
+}
+@media (max-width: 768px) {
+    .top-bar .top-bar-search-input[type='text'],
+    .top-bar .top-bar-search-input#smartSearchTrigger {
+        max-width: none !important;
+        font-size: 0.72rem;
+        padding-left: 1.6rem;
+    }
+}
+.top-bar-search-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    min-width: 0;
+}
+.top-bar-search-wrap i {
+    position: absolute;
+    left: 0.65rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 0.75rem;
+    pointer-events: none;
+}
+.top-bar .mobile-menu-toggle {
+    position: relative;
+    top: auto;
+    left: auto;
+    background: transparent;
+    box-shadow: none;
+    border: 0;
+    color: #e2e8f0;
+    padding: 0.35rem 0.5rem;
+    border-radius: 4px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.top-bar .mobile-menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+@media (max-width: 768px) {
+    .top-bar .mobile-menu-toggle {
+        display: flex !important;
+    }
+}
+.top-bar .theme-toggle {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+}
+.top-bar .theme-toggle:hover {
+    border-color: rgba(201, 168, 76, 0.6);
+    background: rgba(255, 255, 255, 0.12);
+}
+.top-bar .theme-toggle__text {
+    color: #e2e8f0;
+}
+
+/* Modals above fixed top-bar (1010) */
+.modal {
+    z-index: 1060 !important;
+}
+.modal-backdrop {
+    z-index: 1055 !important;
+}
+.modal.show {
+    z-index: 1060 !important;
+}
+.modal-dialog {
+    position: relative;
+    z-index: 1061 !important;
+}
