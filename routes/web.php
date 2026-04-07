@@ -199,7 +199,9 @@ Route::middleware(['auth', 'verified', 'mis.access'])->prefix('mis')->name('mis.
 
         Route::get('/content-blocks', [ContentBlockController::class, 'index'])->name('content-blocks.index');
         Route::post('/content-blocks', [ContentBlockController::class, 'store'])->name('content-blocks.store');
+        Route::post('/content-blocks/upload-image', [ContentBlockController::class, 'uploadImage'])->name('content-blocks.upload-image');
         Route::get('/content-blocks/{contentBlock}/edit', [ContentBlockController::class, 'edit'])->name('content-blocks.edit');
+        Route::post('/content-blocks/{contentBlock}/duplicate', [ContentBlockController::class, 'duplicate'])->name('content-blocks.duplicate');
         Route::patch('/content-blocks/{contentBlock}', [ContentBlockController::class, 'update'])->name('content-blocks.update');
         Route::delete('/content-blocks/{contentBlock}', [ContentBlockController::class, 'destroy'])->name('content-blocks.destroy');
 

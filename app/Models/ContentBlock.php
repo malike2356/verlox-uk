@@ -11,9 +11,10 @@ class ContentBlock extends Model
     protected $casts = ['is_active' => 'boolean'];
 
     public const TYPES = [
-        'text' => 'Single line text',
-        'textarea' => 'Plain text (multi-line)',
-        'html' => 'HTML / rich content',
+        'text'      => 'Single line text',
+        'textarea'  => 'Plain text (multi-line)',
+        'html'      => 'HTML / Rich content (WYSIWYG)',
+        'markdown'  => 'Markdown',
         'image_url' => 'Image URL',
     ];
 
