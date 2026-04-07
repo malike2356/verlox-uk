@@ -1,4 +1,4 @@
-<section class="rounded-2xl border border-red-200 dark:border-red-900/40 bg-white/90 dark:bg-slate-900/40 p-5 space-y-4">
+<section class="rounded-2xl border border-red-200 dark:border-red-900/40 bg-white dark:bg-slate-900/80 p-5 space-y-4">
 
     <header class="border-b border-red-100 dark:border-red-900/30 pb-4">
         <h2 class="text-sm font-semibold text-red-700 dark:text-red-400">{{ __('Delete account') }}</h2>

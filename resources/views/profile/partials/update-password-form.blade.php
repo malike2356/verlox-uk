@@ -1,4 +1,4 @@
-<section class="rounded-2xl border border-gray-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/40 p-5 space-y-4">
+<section class="rounded-2xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-5 space-y-4">
 
     <header class="border-b border-gray-100 dark:border-slate-800 pb-4">
         <h2 class="text-sm font-semibold text-gray-900 dark:text-white">{{ __('Password') }}</h2>

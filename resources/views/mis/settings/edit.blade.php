@@ -7,7 +7,7 @@
 @php
     $inp = 'w-full rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm text-gray-900 dark:text-white focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500';
     $lbl = 'block text-xs font-medium text-gray-700 dark:text-slate-300 mb-1';
-    $sec = 'rounded-2xl border border-gray-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/40 p-5 space-y-4';
+    $sec = 'rounded-2xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-5 space-y-4';
 @endphp
 
 <div class="mx-auto max-w-7xl space-y-4">
@@ -19,7 +19,7 @@
             <div class="-mt-6 flex flex-wrap items-end justify-between gap-4">
                 <div class="flex items-end gap-4">
                     @if($logo = $settings->logoPublicUrl())
-                        <img src="{{ $logo }}" alt="" class="h-16 w-16 shrink-0 rounded-2xl border-4 border-white dark:border-slate-900 object-contain bg-white shadow-md p-1">
+                        <img src="{{ $logo }}" alt="" class="h-16 w-16 shrink-0 rounded-2xl border-4 border-white dark:border-slate-900 object-contain bg-white dark:bg-slate-800 shadow-md p-1">
                     @else
                         <div class="h-16 w-16 shrink-0 rounded-2xl border-4 border-white dark:border-slate-900 bg-verlox-accent/10 shadow-md flex items-center justify-center">
                             <span class="text-2xl font-bold text-verlox-accent">{{ substr($settings->company_name ?? 'V', 0, 1) }}</span>
@@ -126,7 +126,7 @@
                             <p class="text-xs font-medium text-gray-700 dark:text-slate-300">Favicon</p>
                             <p class="text-[11px] text-gray-400 dark:text-slate-500">Browser tab. ICO, PNG, SVG, WebP · max 512 KB</p>
                             @if($url = $settings->faviconPublicUrl())
-                                <img src="{{ $url }}" alt="" class="h-8 w-8 object-contain rounded border border-gray-200 dark:border-slate-700 bg-white">
+                                <img src="{{ $url }}" alt="" class="h-8 w-8 object-contain rounded border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
                             @endif
                             <input type="file" name="favicon" accept=".ico,.png,.jpg,.jpeg,.gif,.webp,.svg,image/*"
                                 class="block w-full text-xs text-gray-600 dark:text-slate-400 file:mr-2 file:rounded-md file:border-0 file:bg-gray-200 dark:file:bg-slate-700 file:px-2 file:py-1 file:text-xs file:font-medium">
@@ -141,7 +141,7 @@
                             <p class="text-xs font-medium text-gray-700 dark:text-slate-300">Logo</p>
                             <p class="text-[11px] text-gray-400 dark:text-slate-500">Header, emails. PNG, JPG, WebP, SVG · max 2 MB</p>
                             @if($url = $settings->logoPublicUrl())
-                                <img src="{{ $url }}" alt="" class="max-h-10 max-w-[140px] object-contain rounded border border-gray-200 dark:border-slate-700 bg-white p-0.5">
+                                <img src="{{ $url }}" alt="" class="max-h-10 max-w-[140px] object-contain rounded border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-0.5">
                             @endif
                             <input type="file" name="logo" accept=".png,.jpg,.jpeg,.gif,.webp,.svg,image/*"
                                 class="block w-full text-xs text-gray-600 dark:text-slate-400 file:mr-2 file:rounded-md file:border-0 file:bg-gray-200 dark:file:bg-slate-700 file:px-2 file:py-1 file:text-xs file:font-medium">
@@ -156,9 +156,9 @@
                             <p class="text-xs font-medium text-gray-700 dark:text-slate-300">Invoice logo</p>
                             <p class="text-[11px] text-gray-400 dark:text-slate-500">Invoice screens only. Falls back to main logo.</p>
                             @if($url = $settings->invoiceOnlyPublicUrl())
-                                <img src="{{ $url }}" alt="" class="max-h-10 max-w-[140px] object-contain rounded border border-gray-200 dark:border-slate-700 bg-white p-0.5">
+                                <img src="{{ $url }}" alt="" class="max-h-10 max-w-[140px] object-contain rounded border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-0.5">
                             @elseif($settings->logo_path && ($fallback = $settings->logoPublicUrl()))
-                                <img src="{{ $fallback }}" alt="" class="max-h-10 max-w-[140px] object-contain rounded border border-gray-200 dark:border-slate-700 bg-white p-0.5 opacity-50">
+                                <img src="{{ $fallback }}" alt="" class="max-h-10 max-w-[140px] object-contain rounded border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-0.5 opacity-50">
                             @endif
                             <input type="file" name="invoice_logo" accept=".png,.jpg,.jpeg,.gif,.webp,.svg,image/*"
                                 class="block w-full text-xs text-gray-600 dark:text-slate-400 file:mr-2 file:rounded-md file:border-0 file:bg-gray-200 dark:file:bg-slate-700 file:px-2 file:py-1 file:text-xs file:font-medium">
