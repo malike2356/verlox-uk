@@ -104,16 +104,15 @@ class SettingsController extends Controller
             $settings->invoice_logo_path = null;
         }
 
-        if ($settings->isDirty(['favicon_path', 'logo_path', 'invoice_logo_path'])) {
-            $settings->save();
-        }
-
         $payload = collect($data)->except([
             'favicon', 'logo', 'invoice_logo',
             'clear_favicon', 'clear_logo', 'clear_invoice_logo',
         ])->all();
         $payload['zoho_auto_sync_invoices'] = $request->boolean('zoho_auto_sync_invoices');
         $payload['zoho_auto_sync_expenses'] = $request->boolean('zoho_auto_sync_expenses');
+        $payload['favicon_path']      = $settings->favicon_path;
+        $payload['logo_path']         = $settings->logo_path;
+        $payload['invoice_logo_path'] = $settings->invoice_logo_path;
         $settings->update($payload);
 
         return back()->with('status', 'settings-updated');

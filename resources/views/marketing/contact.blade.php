@@ -12,8 +12,14 @@
 
 @section('content')
 @php
-    $contactEmail = $settings->support_email ?: 'contact@verlox.ukk';
+    $contactEmail = $settings->support_email ?: 'contact@verlox.uk';
     $contactMailto = 'mailto:'.$contactEmail;
+    $t = fn(string $key, string $fallback) => e($blocks->get($key)?->body ?: $fallback);
+    $h = function(string $key, string $fallback) use ($blocks): string {
+        $b = $blocks->get($key);
+        if (!$b || ($b->body === null || $b->body === '')) return $fallback;
+        return match($b->type) { 'html' => $b->body, 'textarea' => nl2br(e($b->body)), default => e($b->body) };
+    };
 @endphp
 
 @include('marketing.partials.topbar')
@@ -22,9 +28,9 @@
     <section class="section section--alt">
         <div class="container">
             <header class="section__head reveal">
-                <p class="section__eyebrow">Contact</p>
-                <h1 class="section__title">Leave your details - we will follow up</h1>
-                <p class="section__subtitle">Tell us what you do and what you are interested in. We will come back with the next step.</p>
+                <p class="section__eyebrow">{!! $t('contact_eyebrow', 'Contact') !!}</p>
+                <h1 class="section__title">{!! $t('contact_title', 'Leave your details - we will follow up') !!}</h1>
+                <p class="section__subtitle">{!! $h('contact_subtitle', 'Tell us what you do and what you are interested in. We will come back with the next step.') !!}</p>
             </header>
 
             <div class="contact">
