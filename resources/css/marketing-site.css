@@ -402,11 +402,15 @@ html[data-theme="dark"] .contact__info-divs h3 { color: rgba(201,168,76,.7) }
 .contact__div-item strong { color: var(--ink); display: block; margin-bottom: 2px }
 
 /* ─── Footer ─────────────────────────────────────────────────────────────────── */
-.footer { border-top: 1px solid var(--border-subtle); padding: 24px 0; background: var(--bg) }
-.footer__inner { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted) }
-.footer__right a { color: var(--accent-strong); text-decoration: none }
-.footer__right a:hover { text-decoration: underline }
-.footer__legal { margin-top: 12px; font-size: 12px; color: var(--muted); line-height: 1.5 }
+.footer {
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: 24px 0;
+  background: rgba(11,24,41,.97);
+}
+.footer__inner { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: rgba(255,255,255,.5) }
+.footer__right a { color: #C9A84C; text-decoration: none }
+.footer__right a:hover { text-decoration: underline; color: #e0c070 }
+.footer__legal { margin-top: 12px; font-size: 12px; color: rgba(255,255,255,.35); line-height: 1.5 }
 
 /* ─── Scroll reveal ───────────────────────────────────────────────────────────── */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease }
