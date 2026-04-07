@@ -1,11 +1,12 @@
-<section class="rounded-2xl border border-gray-200 dark:border-slate-800 overflow-hidden shadow-sm">
+<section class="rounded-2xl border border-gray-200 dark:border-slate-700 overflow-hidden shadow-sm">
 
     {{-- Banner --}}
-    <div class="h-24 bg-gradient-to-r from-sky-400 via-sky-500 to-indigo-500 dark:from-sky-700 dark:via-sky-800 dark:to-indigo-900"></div>
+    <div class="h-28 bg-gradient-to-r from-sky-400 via-sky-500 to-indigo-500 dark:from-slate-700 dark:via-slate-800 dark:to-slate-900"></div>
 
-    <div class="bg-white dark:bg-slate-900/60 px-6 pb-6">
-        {{-- Avatar + name row --}}
-        <div class="-mt-10 flex flex-wrap items-end justify-between gap-4">
+    <div class="bg-white dark:bg-slate-900 px-6 pb-6">
+
+        {{-- Avatar + badges row --}}
+        <div class="-mt-8 flex flex-wrap items-end justify-between gap-4">
             <div class="flex items-end gap-4">
                 <img
                     src="{{ $user->profilePhotoUrl() }}"
@@ -20,16 +21,17 @@
                     <p class="text-sm text-gray-500 dark:text-slate-400 truncate">{{ $user->job_title ?: __('No job title set') }}</p>
                 </div>
             </div>
+
             <div class="mb-2 flex flex-wrap items-center gap-2">
                 @if ($user->hasVerifiedEmail())
-                    <span style="display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#166534;border-radius:9999px;padding:3px 10px;font-size:11px;font-weight:600;">
-                        <svg style="width:12px;height:12px;flex-shrink:0;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    <span class="inline-flex items-center gap-1 rounded-full border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
+                        <svg class="h-3 w-3 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                         {{ __('Verified') }}
                     </span>
                 @else
-                    <span style="background:#fef9c3;color:#854d0e;border-radius:9999px;padding:3px 10px;font-size:11px;font-weight:600;">{{ __('Unverified') }}</span>
+                    <span class="rounded-full border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/50 px-3 py-1 text-xs font-semibold text-amber-700 dark:text-amber-300">{{ __('Unverified') }}</span>
                 @endif
-                <span style="background:#e0f2fe;color:#075985;border-radius:9999px;padding:3px 10px;font-size:11px;font-weight:600;">
+                <span class="rounded-full border border-sky-200 dark:border-sky-800 bg-sky-50 dark:bg-sky-950/50 px-3 py-1 text-xs font-semibold text-sky-700 dark:text-sky-300">
                     {{ $user->is_admin ? __('Administrator') : __('Staff') }}
                 </span>
             </div>
@@ -52,6 +54,7 @@
                 </div>
             @endif
         </div>
+
     </div>
 
 </section>
