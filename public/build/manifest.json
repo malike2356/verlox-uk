@@ -4,7 +4,7 @@
     "name": "module.esm"
   },
   "resources/css/app.css": {
-    "file": "assets/app-Dz_EmqrW.css",
+    "file": "assets/app-DpobQNl6.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -13,7 +13,7 @@
     ]
   },
   "resources/css/marketing-site.css": {
-    "file": "assets/marketing-site-D0SACQJZ.css",
+    "file": "assets/marketing-site-CrXWwqh_.css",
     "src": "resources/css/marketing-site.css",
     "isEntry": true,
     "name": "marketing-site",
@@ -31,7 +31,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-BxppFYUM.js",
+    "file": "assets/app-D2AdYxHR.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,

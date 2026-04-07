@@ -11,7 +11,7 @@
                 <img
                     src="{{ $user->profilePhotoUrl() }}"
                     alt=""
-                    class="h-20 w-20 shrink-0 rounded-2xl border-4 border-white dark:border-slate-900 object-cover shadow-lg"
+                    class="h-20 w-20 shrink-0 rounded-2xl border-4 border-white dark:border-slate-900 object-cover object-top shadow-lg"
                     width="80" height="80"
                     loading="lazy"
                     referrerpolicy="no-referrer"
