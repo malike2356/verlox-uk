@@ -90,9 +90,9 @@
         <div class="container">
             <div class="va-enquiry reveal">
                 <div>
-                    <p class="section__eyebrow">{!! $t(‘va_enquiry_eyebrow’, ‘Next step’) !!}</p>
-                    <h2 class="section__title">{!! $t(‘va_enquiry_title’, ‘Tell us what you need covered’) !!}</h2>
-                    <p class="section__subtitle">{!! $h(‘va_enquiry_subtitle’, "We’ll reply with tier options, indicative hours, and onboarding steps. No obligation.") !!}</p>
+                    <p class="section__eyebrow">{!! $t('va_enquiry_eyebrow', 'Next step') !!}</p>
+                    <h2 class="section__title">{!! $t('va_enquiry_title', 'Tell us what you need covered') !!}</h2>
+                    <p class="section__subtitle">{!! $h('va_enquiry_subtitle', "We'll reply with tier options, indicative hours, and onboarding steps. No obligation.") !!}</p>
                     <p class="va-enquiry__meta">
                         <a class="btn btn--primary" href="{{ route('marketing.book') }}">Book a call</a>
                     </p>
