@@ -116,6 +116,6 @@ class SettingsController extends Controller
         $payload['zoho_auto_sync_expenses'] = $request->boolean('zoho_auto_sync_expenses');
         $settings->update($payload);
 
-        return back()->with('status', 'Settings saved.');
+        return back()->with('status', 'settings-updated');
     }
 }
