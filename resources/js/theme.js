@@ -19,7 +19,7 @@ function applyVerloxTheme(theme) {
 
 function initVerloxTheme() {
     const stored = localStorage.getItem('verlox-theme');
-    let theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
+    let theme = stored === 'light' || stored === 'dark' ? stored : 'light';
     applyVerloxTheme(theme);
 
     document.addEventListener('click', (e) => {

@@ -1,6 +1,6 @@
 @php($misCompany = \App\Models\CompanySetting::current())
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
 <head>
     @include('partials.theme-init')
     <meta charset="utf-8">

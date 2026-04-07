@@ -1,6 +1,6 @@
 @php($settings = $settings ?? \App\Models\CompanySetting::current())
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark" data-theme="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="" data-theme="light">
 <head>
     @include('partials.theme-init')
     <meta charset="utf-8">

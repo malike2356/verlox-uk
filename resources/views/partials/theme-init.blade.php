@@ -4,7 +4,7 @@
     try {
         var t = localStorage.getItem('verlox-theme');
         if (t !== 'light' && t !== 'dark') {
-            t = 'dark';
+            t = 'light';
         }
         document.documentElement.setAttribute('data-theme', t);
         document.documentElement.classList.toggle('dark', t === 'dark');
