@@ -154,3 +154,20 @@ html[data-theme='dark'] .mis-shell-main main.mis-main .mis-pipeline-card {
 }
 
 /* File input "Browse" dark styling lives in app.css - Lightning+Bootstrap minify here drops ::file-selector-button base rules. */
+
+/* ============================================================
+   Dark mode: card/section background overrides
+   Must live AFTER Bootstrap import — Bootstrap uses !important
+   on .bg-white, so these rules need to come after it and also
+   use !important to win.
+   ============================================================ */
+html.dark .mis-shell-main .bg-white,
+html[data-theme='dark'] .mis-shell-main .bg-white {
+    background-color: rgba(15, 23, 42, 0.85) !important;
+}
+
+/* Hero card slightly different opacity to stand out */
+html.dark .mis-shell-main section.overflow-hidden.bg-white,
+html[data-theme='dark'] .mis-shell-main section.overflow-hidden.bg-white {
+    background-color: rgb(15, 23, 42) !important;
+}
