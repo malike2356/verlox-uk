@@ -48,7 +48,11 @@ body {
   color: var(--ink);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
+#main { flex: 1 }
 a { color: inherit }
 .container { width: min(1160px, 92vw); margin: 0 auto }
 
