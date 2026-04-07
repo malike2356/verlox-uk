@@ -1,17 +1,17 @@
-<section class="rounded-2xl border border-gray-200 dark:border-slate-700 overflow-hidden shadow-sm">
+<section class="rounded-2xl border border-gray-200 dark:border-slate-700 overflow-hidden shadow-sm bg-white dark:bg-slate-900/60">
 
-    {{-- Banner --}}
-    <div class="h-28 bg-gradient-to-r from-sky-400 via-sky-500 to-indigo-500 dark:from-slate-700 dark:via-slate-800 dark:to-slate-900"></div>
+    {{-- Banner: vibrant in light, deep blue-indigo in dark --}}
+    <div class="h-32 bg-gradient-to-r from-sky-400 via-sky-500 to-indigo-500 dark:from-indigo-950 dark:via-sky-950 dark:to-slate-900"></div>
 
-    <div class="bg-white dark:bg-slate-900 px-6 pb-6">
+    <div class="px-6 pb-6">
 
-        {{-- Avatar + badges row --}}
-        <div class="-mt-8 flex flex-wrap items-end justify-between gap-4">
+        {{-- Avatar + badges --}}
+        <div class="-mt-6 flex flex-wrap items-end justify-between gap-4">
             <div class="flex items-end gap-4">
                 <img
                     src="{{ $user->profilePhotoUrl() }}"
                     alt=""
-                    class="h-20 w-20 shrink-0 rounded-2xl border-4 border-white dark:border-slate-900 object-cover shadow-md"
+                    class="h-20 w-20 shrink-0 rounded-2xl border-4 border-white dark:border-slate-900 object-cover shadow-lg"
                     width="80" height="80"
                     loading="lazy"
                     referrerpolicy="no-referrer"
