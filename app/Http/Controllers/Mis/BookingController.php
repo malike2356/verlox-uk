@@ -92,6 +92,26 @@ class BookingController extends Controller
         return back()->with('status', 'Date override saved.');
     }
 
+    public function updateOverride(Request $request, BookingDateOverride $bookingDateOverride): RedirectResponse
+    {
+        $data = $request->validate([
+            'date' => ['required', 'date'],
+            'type' => ['required', 'in:unavailable,hours'],
+            'start_time' => ['required_if:type,hours', 'nullable', 'date_format:H:i'],
+            'end_time' => ['required_if:type,hours', 'nullable', 'date_format:H:i', 'after:start_time'],
+            'note' => ['nullable', 'string', 'max:200'],
+        ]);
+        $bookingDateOverride->update([
+            'date' => $data['date'],
+            'type' => $data['type'],
+            'start_time' => $data['type'] === 'hours' ? ($data['start_time'].':00') : null,
+            'end_time' => $data['type'] === 'hours' ? ($data['end_time'].':00') : null,
+            'note' => $data['note'] ?? null,
+        ]);
+
+        return back()->with('status', 'Override updated.');
+    }
+
     public function destroyOverride(BookingDateOverride $bookingDateOverride): RedirectResponse
     {
         $bookingDateOverride->delete();
@@ -113,6 +133,43 @@ class BookingController extends Controller
         ]);
 
         return back()->with('status', 'Availability rule added.');
+    }
+
+    public function updateRule(Request $request, BookingAvailabilityRule $bookingAvailabilityRule): RedirectResponse
+    {
+        $data = $request->validate([
+            'weekday' => ['required', 'integer', 'min:0', 'max:6'],
+            'start_time' => ['required', 'date_format:H:i'],
+            'end_time' => ['required', 'date_format:H:i', 'after:start_time'],
+        ]);
+        $bookingAvailabilityRule->update([
+            'weekday' => $data['weekday'],
+            'start_time' => $data['start_time'].':00',
+            'end_time' => $data['end_time'].':00',
+        ]);
+
+        return back()->with('status', 'Availability rule updated.');
+    }
+
+    public function moveRule(Request $request, BookingAvailabilityRule $bookingAvailabilityRule): JsonResponse
+    {
+        $data = $request->validate([
+            'weekday' => ['required', 'integer', 'min:0', 'max:6'],
+        ]);
+        $bookingAvailabilityRule->update(['weekday' => $data['weekday']]);
+
+        return response()->json(['ok' => true]);
+    }
+
+    public function duplicateRule(BookingAvailabilityRule $bookingAvailabilityRule): RedirectResponse
+    {
+        BookingAvailabilityRule::create([
+            'weekday' => $bookingAvailabilityRule->weekday,
+            'start_time' => $bookingAvailabilityRule->start_time,
+            'end_time' => $bookingAvailabilityRule->end_time,
+        ]);
+
+        return back()->with('status', 'Availability rule duplicated.');
     }
 
     public function destroyRule(BookingAvailabilityRule $bookingAvailabilityRule): RedirectResponse

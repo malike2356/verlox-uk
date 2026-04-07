@@ -156,8 +156,12 @@ Route::middleware(['auth', 'verified', 'mis.access'])->prefix('mis')->name('mis.
 
         Route::get('/bookings-meta/availability', [MisBookingController::class, 'availability'])->name('bookings.availability');
         Route::post('/bookings-meta/availability', [MisBookingController::class, 'storeRule'])->name('bookings.availability.store');
+        Route::patch('/bookings-meta/availability/{bookingAvailabilityRule}', [MisBookingController::class, 'updateRule'])->name('bookings.availability.update');
+        Route::patch('/bookings-meta/availability/{bookingAvailabilityRule}/weekday', [MisBookingController::class, 'moveRule'])->name('bookings.availability.move');
+        Route::post('/bookings-meta/availability/{bookingAvailabilityRule}/duplicate', [MisBookingController::class, 'duplicateRule'])->name('bookings.availability.duplicate');
         Route::delete('/bookings-meta/availability/{bookingAvailabilityRule}', [MisBookingController::class, 'destroyRule'])->name('bookings.availability.destroy');
         Route::post('/bookings-meta/overrides', [MisBookingController::class, 'storeOverride'])->name('bookings.overrides.store');
+        Route::patch('/bookings-meta/overrides/{bookingDateOverride}', [MisBookingController::class, 'updateOverride'])->name('bookings.overrides.update');
         Route::delete('/bookings-meta/overrides/{bookingDateOverride}', [MisBookingController::class, 'destroyOverride'])->name('bookings.overrides.destroy');
 
         Route::delete('/bookings/{booking}', [MisBookingController::class, 'destroy'])->name('bookings.destroy');
